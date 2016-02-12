@@ -4,3 +4,6 @@ from django.http import HttpResponse
 
 def index(request):
     return render(request, 'courses/index.html')
+
+def about(request):
+    return render(request, 'courses/about.html')
