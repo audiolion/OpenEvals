@@ -2,72 +2,46 @@
 <html>
 <head>
     <title>{% block title %}OpenEvals{% endblock %}</title>
-    <!-- Latest compiled and minified CSS -->
+    {% load staticfiles %}
+    {% load compress %}
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-<!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    {% compress css %}
+    <link rel="stylesheet" type="text/less" media="all" href="{% static 'less/style.less' %}" />
+    {% endcompress %}
 </head>
 <body>
-    <nav class="header-background navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-            <a class="navbar-brand" href="/" style="margin-top:-3px;">
-                {% load staticfiles %}
-                <img src="{% static "brand.svg" %}" style="width:101px;"/>
-            </a>
-            </div>
-            <div id="nav-collapse" class="navbar-collapse collapse"
-                 style="border: 0px none; height: 0px;">
-                <ul class="nav navbar-nav navbar-left">
-                    <li class="">
-                        <a href="{% url 'main:about' %}">
-                            About</a>
-                    </li>
-                    <li class="">
-                        <a href="#">
-                            Professors
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="#">
-                            Courses
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="#">
-                            Search
-                        </a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle"  data-toggle="dropdown" href="#">Global
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Rochester</a></li>
-                            <li><a href="#">Dubai</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">Login</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div style="margin-top: 50px">
-            {% block banner %}
+  <nav class="header-background navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/" style="margin-top:-3px;">
+          <img src="{% static "brand.svg" %}" style="width:101px;"/>
+        </a>
+      </div>
+      <div id="nav-collapse" class="navbar-collapse collapse"
+            style="border: 0px none; height: 0px;">
+        <ul class="nav navbar-nav navbar-left">
+          <li class="">
+            <a href="{% url 'main:about' %}">About</a>
+          </li>
+          <li class="">
+            <a href="{% url 'main:search' %}">Search</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  {% block banner %}
 
-            {% endblock %}
-            {% block content %}
+  {% endblock %}
+  {% block content %}
 
-            {% endblock  %}
-        </div>
-
-    </nav>
+  {% endblock  %}
 </body>
 </html>

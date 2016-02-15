@@ -3,45 +3,46 @@
 {% block title %}OpenEvals{% endblock %}
 
 {% block banner %}
-    {% load staticfiles %}
-    <div class="container-fluid carousel" style="background-image:url({% static "carousel.jpg" %})">
-        <div class="col-xs-12 col-sm-6 col-sm-offset-3" style="top:25%;
-             margin-top:15px;">
-            <h2 class="carousel-title text-center">Open Evals</h2>
-            <div class="">
-                <div class="carousel-description text-center"></div>
-                <h3>
-                    <p>Review evaluations of courses and professors by RIT students</p>
-                </h3>
-            </div>
-
+{% load staticfiles %}
+<div class="container-fluid carousel" style="background-image:url({% static "carousel.jpg" %})">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3" style="top:25%;
+         margin-top:15px;">
+        <h2 class="carousel-title text-center">OPEN EVALS</h2>
+        <div class="carousel-description text-center">
+          <h3>Course and Professor Evaluations, for students by students.</h3>
         </div>
     </div>
+</div>
 {% endblock banner %}
 
 {% block content %}
-<div class="col-md-4 col-sm-12">
-                <h4 class="text-center">
-                    Blurb Title
-                </h4>
-                <div class="square-content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor.
-                </div>
-            </div>
+<div class="container">
+  <h2 class="text-center">Learn More</h2>
+  <div class="row">
     <div class="col-md-4 col-sm-12">
-                <h4 class="text-center">
-                    Blurb Title
-                </h4>
-                <div class="square-content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor.
-                </div>
-            </div>
+      <div class="panel panel-default text-center">
+        <div class="panel-body">
+          <h2 class="text-primary">Blurb 1 Title</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit </p>
+        </div>
+      </div>
+    </div>
     <div class="col-md-4 col-sm-12">
-                <h4 class="text-center">
-                    Blurb Title
-                </h4>
-                <div class="square-content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor.
-                </div>
-            </div>
+      <div class="panel panel-default text-center">
+        <div class="panel-body">
+          <h2 class="text-primary">Blurb 2 Title</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <div class="panel panel-default text-center">
+        <div class="panel-body">
+          <h2 class="text-primary">Blurb 3 Title</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock content %}

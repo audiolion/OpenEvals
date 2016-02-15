@@ -3,7 +3,6 @@
 // You may include this file into your less files to benefit from
 // mixins and variables that bootstrap provides.
 
-@import "custom.bootstrap.mixins.import.less";
 
 
 // @import "bootstrap/less/variables.less"
@@ -23,9 +22,13 @@
 @gray-light:             lighten(@gray-base, 46.7%); // #777
 @gray-lighter:           lighten(@gray-base, 93.5%); // #eee
 
+@light-gray:      #F5F5F5;
+@dark-gray:       #333;
+@main-background: #eee;
+
 @brand-primary:         #F36E21;
-@brand-secondary:       #513127;
-@brand-success:         #5cb85c;
+@brand-secondary: 		#513127;
+@brand-success:         #513127;
 @brand-info:            #5bc0de;
 @brand-warning:         #f0ad4e;
 @brand-danger:          #d9534f;
@@ -52,7 +55,10 @@
 //
 //## Font, line-height, and color for body text, headings, and more.
 
-@font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:600);
+@font-family-sans-serif: 'Source Sans Pro', "Helvetica Neue", Helvetica, Arial, sans-serif;
 @font-family-serif:       Georgia, "Times New Roman", Times, serif;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 @font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
@@ -358,7 +364,7 @@
 
 // Basics of a navbar
 @navbar-height:                    50px;
-@navbar-margin-bottom:             0px;
+@navbar-margin-bottom:             @line-height-computed;
 @navbar-border-radius:             @border-radius-base;
 @navbar-padding-horizontal:        floor((@grid-gutter-width / 2));
 @navbar-padding-vertical:          ((@navbar-height - @line-height-computed) / 2);
@@ -507,9 +513,9 @@
 @state-warning-bg:               #fcf8e3;
 @state-warning-border:           darken(spin(@state-warning-bg, -10), 5%);
 
-@state-danger-text:             #444;
-@state-danger-bg:               rgba(255,255,255,0.4);
-@state-danger-border:           @brand-secondary;
+@state-danger-text:              #444;
+@state-danger-bg:                rgba(255,255,255,0.4);
+@state-danger-border:            @brand-secondary;
 
 
 //== Tooltips
@@ -568,6 +574,8 @@
 //** Primary label background color
 @label-primary-bg:            @brand-primary;
 //** Success label background color
+@label-expired-bg:            @brand-secondary;
+//** Expired label background color
 @label-success-bg:            @brand-success;
 //** Info label background color
 @label-info-bg:               @brand-info;
@@ -864,6 +872,3 @@
 @dl-horizontal-offset:        @component-offset-horizontal;
 //** Horizontal line color.
 @hr-border:                   @gray-lighter;
-
-// Override bootstrap variables with our own
-@import "../sites/variables.import.less";
