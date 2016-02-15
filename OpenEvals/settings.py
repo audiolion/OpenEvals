@@ -101,12 +101,14 @@ WSGI_APPLICATION = 'OpenEvals.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': secrets.NAME,
-        'USER': secrets.USER,
-        'PASSWORD': secrets.PASSWORD,
-        'HOST': secrets.HOST,
-        'PORT': secrets.PORT,
+        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #'NAME': secrets.NAME,
+        #'USER': secrets.USER,
+        #'PASSWORD': secrets.PASSWORD,
+        #'HOST': secrets.HOST,
+        #'PORT': secrets.PORT,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'dev'
     },
 
 
