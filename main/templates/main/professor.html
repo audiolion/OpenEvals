@@ -1,0 +1,39 @@
+{% extends "main/base.html" %}
+
+{% block title %}Professor _PROF_NAME_HERE{% endblock %}
+
+{% block banner %}
+<div class="text-center">
+    <h1>Professor {{firstname}} {{lastname}}</h1>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading text-center"><h2>Rating</h2></div>
+    <table class="table">
+      <tr>
+        <th>Question</th>
+        <th>Rating</th>
+      </tr>
+      <tr>
+        <td>Question 1</td>
+        <td>99%</td>
+      </tr>
+      <tr>
+        <td>Question 2</td>
+        <td>99%</td>
+      </tr>
+      <tr>
+        <td>Question 3</td>
+        <td>99%</td>
+      </tr>
+      <tr>
+        <td>Question 4</td>
+        <td>99%</td>
+      </tr>
+    </table>
+  </div>
+</div>
+{% endblock %}
