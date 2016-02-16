@@ -15,7 +15,14 @@
     <div style="padding-top: 26px; padding-bottom:26px;">
         {% csrf_token %}
         <input index="" name="search" class="form-control input-lg text-center" id="search" placeholder="Search Courses and Professors by name or code" style="height: 49px; width:100%;">
-        <p>{{ result }}</p>
+        {% for item in result %}
+            <div class="square col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                <div class="square-content">
+                <p>{{ item }}</p>
+                </div>
+            </div>
+
+        {% endfor %}
     </div>
     <div class="row">
 

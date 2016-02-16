@@ -10,7 +10,9 @@ def about(request):
 def search(request):
     if request.method == 'POST':
         data = request.POST["search"]
-        result = "You searched for: " + data
+        result = list()
+        result.append("This is for testing")
+        result.append("You searched for: " + data)
         return render(request, 'main/search.html', {'result': result})
     else:
         return render(request, 'main/search.html')
