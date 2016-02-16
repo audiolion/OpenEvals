@@ -11,9 +11,11 @@
 
 {% block content %}
 <div class="container">
-  <form class="main">
+  <form class="main" action="/search" method="post">
     <div style="padding-top: 26px; padding-bottom:26px;">
-        <input index="" class="form-control input-lg text-center" id="search" placeholder="Search Courses and Professors by name or code" style="height: 49px; width:100%;">
+        {% csrf_token %}
+        <input index="" name="search" class="form-control input-lg text-center" id="search" placeholder="Search Courses and Professors by name or code" style="height: 49px; width:100%;">
+        <p>{{ result }}</p>
     </div>
     <div class="row">
 

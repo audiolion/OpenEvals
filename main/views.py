@@ -8,7 +8,12 @@ def about(request):
     return render(request, 'main/about.html')
     
 def search(request):
-    return render(request, 'main/search.html')
+    if request.method == 'POST':
+        data = request.POST["search"]
+        result = "You searched for: " + data
+        return render(request, 'main/search.html', {'result': result})
+    else:
+        return render(request, 'main/search.html')
 
 def professor(request, lastname, firstname):
     return render_to_response('main/professor.html', {'firstname': firstname,'lastname':lastname})
