@@ -15,14 +15,33 @@
     <div style="padding-top: 26px; padding-bottom:26px;">
         {% csrf_token %}
         <input index="" name="search" class="form-control input-lg text-center" id="search" placeholder="Search Courses and Professors by name or code" style="height: 49px; width:100%;">
+        <div class="col-md-6">
+        <h1>Courses</h1>
         {% for item in result %}
-            <div class="square col-xs-12 col-sm-6 col-md-4 col-lg-4">
+            <a href= "{% url 'main:course_full' %}/{{ item.class_code }}/{{ item.class_number }}" >
+            <div class="square col-xs-12">
                 <div class="square-content">
-                <p>{{ item }}</p>
+                    <p>{{ item.class_code }}-{{ item.class_number }}</p>
+                    <p>{{ item.term_code }}</p>
                 </div>
             </div>
+            </a>
 
         {% endfor %}
+        </div>
+        <div class="col-md-6">
+        <h1>Professors</h1>
+        {% for item in result %}
+            <a href= "{% url 'main:course_full' %}/{{ item.class_code }}/{{ item.class_number }}" >
+            <div class="square col-xs-12">
+                <div class="square-content">
+                    <p>{{ item.instr_full_name }}</p>
+                    <p>{{ item.class_subj }}</p>
+                </div>
+            </div>
+            </a>
+        {% endfor %}
+        </div>
     </div>
     <div class="row">
 
