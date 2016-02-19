@@ -17,8 +17,8 @@
         <input index="" name="search" class="form-control input-lg text-center" id="search" placeholder="Search Courses and Professors by name or code" style="height: 49px; width:100%;">
         <div class="col-md-6">
         <h1>Courses</h1>
-        {% for item in result %}
-            <a href= "{% url 'main:course_full' %}/{{ item.class_code }}/{{ item.class_number }}" >
+        {% for item in courses  %}
+            <a href= "{% url 'main:course_full' item.class_code item.class_number %}" >
             <div class="square col-xs-12">
                 <div class="square-content">
                     <p>{{ item.class_code }}-{{ item.class_number }}</p>
@@ -31,12 +31,12 @@
         </div>
         <div class="col-md-6">
         <h1>Professors</h1>
-        {% for item in result %}
-            <a href= "{% url 'main:course_full' %}/{{ item.class_code }}/{{ item.class_number }}" >
+        {% for prof in professors %}
+            <a href= "{% url 'main:professor_full' prof.fname prof.lname  %}" >
             <div class="square col-xs-12">
                 <div class="square-content">
-                    <p>{{ item.instr_full_name }}</p>
-                    <p>{{ item.class_subj }}</p>
+                    <p>{{ prof.fname }} {{ prof.lname }}</p>
+                    <p>{{ prof.commonCourse }}</p>
                 </div>
             </div>
             </a>

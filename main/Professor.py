@@ -6,6 +6,6 @@ class Professor():
         self.fname = firstname
         self.lname = lastname
     def addCourse(self, course):
-        self.courses.append(course)
+        self.courses.add(course)
     def setCommonCourse(self, courseCode):
         self.commonCourse = courseCode

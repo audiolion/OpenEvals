@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import render_to_response
+from itertools import chain
 from .models import *
 from .Professor import *
 
@@ -11,18 +12,26 @@ def about(request):
     
 def search(request):
     if request.method == 'POST':
-        data = request.POST["search"]
-        results = EvalResults.objects.filter(instr_first_name__in=data, class_code__in=data)
+        searchPOST = request.POST["search"]
+        #Create professor set to pass to the template
+        data = searchPOST.split()
+        results = EvalResults.objects.filter(instr_last_name__in= data) #search by first name
+        if(results.exists() == False):
+            results = EvalResults.objects.filter(instr_first_name__in=data) #search by last name
+
         foundProfs = set()
         for result in results:
             p = Professor(result.instr_first_name, result.instr_last_name)
             myCourse = EvalResults.objects.filter(instr_first_name=result.instr_first_name,
                                                   instr_last_name=result.instr_last_name)
             for c in myCourse:
-                p.add([c.class_code, c.class_number])
+                p.addCourse(c.class_code + "-" + str(c.class_number))
             foundProfs.add(p)
 
-        return render(request, 'main/search.html', {'professors': foundProfs})
+        #Create course set to pass to the template
+        results = EvalResults.objects.filter(class_desc__in=data)
+
+        return render(request, 'main/search.html', {'professors': foundProfs, "courses" : results})
     else:
         return render(request, 'main/search.html')
 
