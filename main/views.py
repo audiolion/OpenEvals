@@ -15,9 +15,9 @@ def search(request):
         searchPOST = request.POST["search"]
         #Create professor set to pass to the template
         data = searchPOST.split()
-        results = EvalResults.objects.filter(instr_last_name__in= data) #search by first name
+        results = EvalResults.objects.filter(instr_last_name__in= data) #search by last name
         if(results.exists() == False):
-            results = EvalResults.objects.filter(instr_first_name__in=data) #search by last name
+            results = EvalResults.objects.filter(instr_first_name__in=data) #search by first name
 
         foundProfs = set()
         for result in results:
@@ -29,7 +29,9 @@ def search(request):
             foundProfs.add(p)
 
         #Create course set to pass to the template
-        results = EvalResults.objects.filter(class_desc__in=data)
+        results = EvalResults.objects.filter(class_desc__contains=searchPOST) #search by readable name
+        if(results.exists() == False):
+            results = EvalResults.objects.filter(class_code__in=data) #search by course code
 
         return render(request, 'main/search.html', {'professors': foundProfs, "courses" : results})
     else:
