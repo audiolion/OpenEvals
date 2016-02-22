@@ -18,6 +18,8 @@ def search(request):
         return render(request, 'main/search.html')
 
 def professor(request, lastname, firstname):
+    lastname = lastname.title()
+    firstname = firstname.title()
     prof = get_list_or_404(EvalResults, instr_last_name=lastname, instr_first_name=firstname)
     
     prof_size = len(prof)
