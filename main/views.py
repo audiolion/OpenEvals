@@ -26,7 +26,7 @@ def search(request):
             myCourse = EvalResults.objects.filter(instr_first_name=result.instr_first_name,
                                                   instr_last_name=result.instr_last_name)
             for c in myCourse:
-                p.addCourse(c.class_code + "-" + str(c.class_number))
+                p.addCourse(Course(c.class_desc, c.class_code, str(c.class_number)))
             p.setCommonCourse()
             foundProfs.add(p)
 
@@ -41,7 +41,7 @@ def search(request):
             myProfessor = EvalResults.objects.filter(class_code=result.class_code,
                                                      class_number=result.class_number)
             for prof in myProfessor:
-                course.addProfessor(prof.instr_full_name)
+                course.addProfessor(Professor(prof.instr_first_name, prof.instr_last_name))
             foundCourses.add(course)
 
         return render(request, 'main/search.html', {'professors': foundProfs, "courses" : foundCourses})

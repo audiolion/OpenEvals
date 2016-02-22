@@ -24,7 +24,7 @@
                     <h2 style="color: black;">{{ course.code}}-{{ course.number }} {{ course.title }}</h2>
                     <h3 style="color: darkorange;">
                     {% for prof in course.professors %}
-                        {{ prof }}
+                        <a href="{% url 'main:professor_full' prof.fname prof.lname %}" >{{ prof.fname }} {{ prof.lname }}</a>
                     {% endfor %}
                     </h3>
                 </div>
@@ -42,7 +42,7 @@
                     <h2 style="color: black;">{{ prof.fname }} {{ prof.lname }}</h2>
                     <h3 style="color: darkorange;">
                     {% for course in prof.courses %}
-                        {{ course }}
+                        <a href="{% url 'main:course_full' course.code course.number %}">{{ course.code }}-{{ course.number }}</a>
                     {% endfor %}
                     - {{ prof.commonCourse }}
                     </h3>

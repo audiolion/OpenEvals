@@ -11,6 +11,6 @@ class Professor():
     def setCommonCourse(self):
         codes = list()
         for course in self.courses:
-            codes.append(course[:4])
+            codes.append(course.code)
         counts = Counter(codes)
         self.commonCourse = counts.most_common(1)[0][0]
