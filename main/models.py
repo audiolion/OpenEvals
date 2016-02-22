@@ -6,7 +6,7 @@ class EvalQuestions(models.Model):
     text = models.CharField(db_column='QUESTION_TEXT', max_length=250)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'CLASS_EVAL_QUESTIONS'
 
 class EvalResults(models.Model):
@@ -33,5 +33,5 @@ class EvalResults(models.Model):
     campus = models.CharField(db_column='CAMPUS', max_length=5)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'CLASS_EVAL_RESULTS'

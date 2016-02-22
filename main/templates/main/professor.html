@@ -1,37 +1,65 @@
 {% extends "main/base.html" %}
 
-{% block title %}Professor _PROF_NAME_HERE{% endblock %}
+{% block title %}Professor {{firstname}} {{lastname}}{% endblock %}
 
 {% block banner %}
-<div class="text-center">
-    <h1>Professor {{firstname}} {{lastname}}</h1>
+{% load staticfiles %}
+<div class="container-fluid campus-carousel"style="background-image:url({% static "carousel.jpg"%})">
+  <div class="col-xs-12 col-sm-6 col-sm-offset-3" style="top:25%; margin-top:15px;">
+    <div class="carousel-description text-center"><h1>Professor {{firstname}} {{lastname}}</h1></div>
+  </div>
 </div>
+
 {% endblock %}
 
 {% block content %}
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-heading text-center"><h2>Rating</h2></div>
-    <table class="table">
+    <table class="table">  
       <tr>
         <th>Question</th>
         <th>Rating</th>
       </tr>
       <tr>
-        <td>Question 1</td>
-        <td>99%</td>
+        <td>{{questions.0.title}}</td>
+        <td>{{ratings.0}}</td>
       </tr>
       <tr>
-        <td>Question 2</td>
-        <td>99%</td>
+        <td>{{questions.1.title}}</td>
+        <td>{{ratings.1}}</td>
       </tr>
       <tr>
-        <td>Question 3</td>
-        <td>99%</td>
+        <td>{{questions.2.title}}</td>
+        <td>{{ratings.2}}</td>
       </tr>
       <tr>
-        <td>Question 4</td>
-        <td>99%</td>
+        <td>{{questions.3.title}}</td>
+        <td>{{ratings.3}}</td>
+      </tr>
+      <tr>
+        <td>{{questions.4.title}}</td>
+        <td>{{ratings.4}}</td>
+      </tr>
+      <tr>
+        <td>{{questions.5.title}}</td>
+        <td>{{ratings.5}}</td>
+      </tr>
+      <tr>
+        <td>{{questions.6.title}}</td>
+        <td>{{ratings.6}}</td>
+      </tr>
+      <tr>
+        <td>{{questions.7.title}}</td>
+        <td>{{ratings.7}}</td>
+      </tr>
+      <tr>
+        <td>{{questions.8.title}}</td>
+        <td>{{ratings.8}}</td>
+      </tr>
+      <tr>
+        <td>{{questions.9.title}}</td>
+        <td>{{ratings.9}}</td>
       </tr>
     </table>
   </div>
