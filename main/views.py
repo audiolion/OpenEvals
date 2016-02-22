@@ -40,7 +40,7 @@ def professor(request, lastname, firstname):
         q_ratings[9] += professor.q10_average
 
     for index in range(10):
-        q_ratings[index] /= prof_size 
+        q_ratings[index] = round(q_ratings[index] / prof_size, 2)
 
     return render(request, 'main/professor.html', {'firstname': firstname,'lastname':lastname, 'questions': questions, 'ratings': q_ratings})
     
