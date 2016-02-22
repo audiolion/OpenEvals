@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.shortcuts import render_to_response
 from .models import *
 
@@ -18,11 +18,12 @@ def search(request):
         return render(request, 'main/search.html')
 
 def professor(request, lastname, firstname):
-    prof = EvalResults.objects.filter(instr_last_name=lastname,
-                                      instr_first_name=firstname)
+    prof = get_object_or_404(EvalResults, instr_last_name=lastname, instr_first_name=firstname)
+    
     prof_size = len(prof)
 
     questions = EvalQuestions.objects.all()
+    
     q_ratings = [0] * 10
 
     # Average question ratings
@@ -41,7 +42,7 @@ def professor(request, lastname, firstname):
     for index in range(10):
         q_ratings[index] /= prof_size 
 
-    return render_to_response('main/professor.html', {'firstname': firstname,'lastname':lastname, 'questions': questions, 'ratings': q_ratings})
+    return render(request, 'main/professor.html', {'firstname': firstname,'lastname':lastname, 'questions': questions, 'ratings': q_ratings})
     
 def course(request, coursecode, coursenumber):
     return render_to_response('main/course.html', {'coursecode': coursecode,'coursenumber':coursenumber})
