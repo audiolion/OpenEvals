@@ -17,12 +17,16 @@
         <input index="" name="search" class="form-control input-lg text-center" id="search" placeholder="Search Courses and Professors by name or code" style="height: 49px; width:100%;">
         <div class="col-md-6">
         <h1>Courses</h1>
-        {% for item in courses  %}
-            <a href= "{% url 'main:course_full' item.class_code item.class_number %}" >
+        {% for course in courses  %}
+            <a href= "{% url 'main:course_full' course.code course.number %}" >
             <div class="square col-xs-12">
-                <div class="square-content">
-                    <p>{{ item.class_code }}-{{ item.class_number }}</p>
-                    <p>{{ item.term_code }}</p>
+                <div class="square-content" style="height:auto;">
+                    <h2 style="color: black;">{{ course.code}}-{{ course.number }} {{ course.title }}</h2>
+                    <h3 style="color: darkorange;">
+                    {% for prof in course.professors %}
+                        {{ prof }}
+                    {% endfor %}
+                    </h3>
                 </div>
             </div>
             </a>
@@ -34,9 +38,14 @@
         {% for prof in professors %}
             <a href= "{% url 'main:professor_full' prof.fname prof.lname  %}" >
             <div class="square col-xs-12">
-                <div class="square-content">
-                    <p>{{ prof.fname }} {{ prof.lname }}</p>
-                    <p>{{ prof.commonCourse }}</p>
+                <div class="square-content" style="height: auto;">
+                    <h2 style="color: black;">{{ prof.fname }} {{ prof.lname }}</h2>
+                    <h3 style="color: darkorange;">
+                    {% for course in prof.courses %}
+                        {{ course }}
+                    {% endfor %}
+                    - {{ prof.commonCourse }}
+                    </h3>
                 </div>
             </div>
             </a>

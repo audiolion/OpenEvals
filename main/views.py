@@ -3,6 +3,7 @@ from django.shortcuts import render_to_response
 from itertools import chain
 from .models import *
 from .Professor import *
+from .Course import *
 
 def index(request):
     return render(request, 'main/index.html')
@@ -26,6 +27,7 @@ def search(request):
                                                   instr_last_name=result.instr_last_name)
             for c in myCourse:
                 p.addCourse(c.class_code + "-" + str(c.class_number))
+            p.setCommonCourse()
             foundProfs.add(p)
 
         #Create course set to pass to the template
@@ -33,7 +35,16 @@ def search(request):
         if(results.exists() == False):
             results = EvalResults.objects.filter(class_code__in=data) #search by course code
 
-        return render(request, 'main/search.html', {'professors': foundProfs, "courses" : results})
+        foundCourses = set()
+        for result in results:
+            course = Course(result.class_desc, result.class_code, result.class_number)
+            myProfessor = EvalResults.objects.filter(class_code=result.class_code,
+                                                     class_number=result.class_number)
+            for prof in myProfessor:
+                course.addProfessor(prof.instr_full_name)
+            foundCourses.add(course)
+
+        return render(request, 'main/search.html', {'professors': foundProfs, "courses" : foundCourses})
     else:
         return render(request, 'main/search.html')
 
