@@ -40,11 +40,14 @@ def professor(request, lastname, firstname):
         q_ratings[7] += professor.q8_average
         q_ratings[8] += professor.q9_average
         q_ratings[9] += professor.q10_average
-
     for index in range(10):
         q_ratings[index] = round(q_ratings[index] / prof_size, 2)
 
-    return render(request, 'main/professor.html', {'firstname': firstname,'lastname':lastname, 'questions': questions, 'ratings': q_ratings})
+    # Removes duplicate classes that the professor teaches
+    seen = set()
+    courses = [x for x in prof if x.class_code not in seen and not seen.add(x.class_code)]
+
+    return render(request, 'main/professor.html', {'firstname': firstname,'lastname':lastname, 'questions': questions, 'ratings': q_ratings, 'courses': courses})
     
 def course(request, coursecode, coursenumber):
     return render_to_response('main/course.html', {'coursecode': coursecode,'coursenumber':coursenumber})
