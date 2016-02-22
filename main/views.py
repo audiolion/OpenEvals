@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_list_or_404, render
 from django.shortcuts import render_to_response
 from .models import *
 
@@ -18,7 +18,7 @@ def search(request):
         return render(request, 'main/search.html')
 
 def professor(request, lastname, firstname):
-    prof = get_object_or_404(EvalResults, instr_last_name=lastname, instr_first_name=firstname)
+    prof = get_list_or_404(EvalResults, instr_last_name=lastname, instr_first_name=firstname)
     
     prof_size = len(prof)
 
