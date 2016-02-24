@@ -22,11 +22,14 @@
             <div class="square col-xs-12">
                 <div class="square-content" style="height:auto;">
                     <h2 style="color: black;">{{ course.code}}-{{ course.number }} {{ course.title }}</h2>
-                    <h3 style="color: darkorange;">
+                    <h4 style="color: darkorange;">
                     {% for prof in course.professors %}
-                        <a href="{% url 'main:professor_full' prof.fname prof.lname %}" >{{ prof.fname }} {{ prof.lname }}</a>
+                        <a href="{% url 'main:professor_full' prof.fname prof.lname %}" style="color: darkorange;" >
+                            {{ prof.fname }} {{ prof.lname }}&nbsp;
+                        </a>
                     {% endfor %}
-                    </h3>
+                    {{ course.ellipses }}
+                    </h4>
                 </div>
             </div>
             </a>
@@ -39,13 +42,17 @@
             <a href= "{% url 'main:professor_full' prof.fname prof.lname  %}" >
             <div class="square col-xs-12">
                 <div class="square-content" style="height: auto;">
-                    <h2 style="color: black;">{{ prof.fname }} {{ prof.lname }}</h2>
-                    <h3 style="color: darkorange;">
-                    {% for course in prof.courses %}
-                        <a href="{% url 'main:course_full' course.code course.number %}">{{ course.code }}-{{ course.number }}</a>
-                    {% endfor %}
-                    - {{ prof.commonCourse }}
-                    </h3>
+                    <div class="row">
+                        <div class="col-xs-6"><h2 style="color: black;">{{ prof.fname }} {{ prof.lname }}</h2></div>
+                        <div class="col-xs-6"><h2 style="color: black; text-align: right">{{ prof.commonCourse }}</h2></div>
+                    </div>
+                        <h4>
+                        {% for course in prof.courses %}
+                            <a href="{% url 'main:course_full' course.code course.number %}" style="color: darkorange;">
+                                {{ course.code }}-{{ course.number }}&nbsp;
+                            </a>
+                        {% endfor %}
+                        </h4>
                 </div>
             </div>
             </a>

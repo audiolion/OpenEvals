@@ -6,9 +6,13 @@ class Course():
         self.code = code
         self.number = number
         self.professors = set()
+        self.ellipses = ""
     def getName(self):
         return self.code + "-" + self.number
 
     def addProfessor(self, prof):
         if len(self.professors) < 3:
             self.professors.add(prof)
+        if(len(self.professors) == 3):
+            self.ellipses = "..."
+

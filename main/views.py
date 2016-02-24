@@ -61,7 +61,7 @@ def search(request):
                         course.addProfessor(Professor(prof.instr_first_name, prof.instr_last_name))
                 foundCourses.add(course)
 
-        return render(request, 'main/search.html', {'professors': foundProfs, "courses" : foundCourses})
+        return render(request, 'main/search.html', {'professors': foundProfs, "courses" : foundCourses},)
     else:
         return render(request, 'main/search.html')
 
