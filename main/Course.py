@@ -10,4 +10,5 @@ class Course():
         return self.code + "-" + self.number
 
     def addProfessor(self, prof):
-        self.professors.add(prof)
+        if len(self.professors) < 3:
+            self.professors.add(prof)

@@ -20,29 +20,46 @@ def search(request):
         if(results.exists() == False):
             results = EvalResults.objects.filter(instr_first_name__in=data) #search by first name
 
-        foundProfs = set()
+        foundProfs = list()
+        #sets to prevent duplicate results
+        seenP = set()
         for result in results:
-            p = Professor(result.instr_first_name, result.instr_last_name)
-            myCourse = EvalResults.objects.filter(instr_first_name=result.instr_first_name,
-                                                  instr_last_name=result.instr_last_name)
-            for c in myCourse:
-                p.addCourse(Course(c.class_desc, c.class_code, str(c.class_number)))
-            p.setCommonCourse()
-            foundProfs.add(p)
+            seenC = set()
+            if result.instr_full_name not in seenP:
+                seenP.add(result.instr_full_name)
+                p = Professor(result.instr_first_name, result.instr_last_name)
+                #Find courses that this professor teaches
+                myCourse = EvalResults.objects.filter(instr_first_name=result.instr_first_name,
+                                                      instr_last_name=result.instr_last_name)
+                for c in myCourse:
+                    if c.class_desc not in seenC:
+                        seenC.add(c.class_desc)
+                        p.addCourse(Course(c.class_desc, c.class_code, str(c.class_number)))
+
+                p.setCommonCourse()
+                foundProfs.append(p)
 
         #Create course set to pass to the template
+        #Reset set for tracking duplicates
+        seenC = set()
         results = EvalResults.objects.filter(class_desc__contains=searchPOST) #search by readable name
         if(results.exists() == False):
             results = EvalResults.objects.filter(class_code__in=data) #search by course code
 
         foundCourses = set()
         for result in results:
-            course = Course(result.class_desc, result.class_code, result.class_number)
-            myProfessor = EvalResults.objects.filter(class_code=result.class_code,
-                                                     class_number=result.class_number)
-            for prof in myProfessor:
-                course.addProfessor(Professor(prof.instr_first_name, prof.instr_last_name))
-            foundCourses.add(course)
+            seenP = set()
+            if result.class_desc not in seenC:
+                seenC.add(result.class_desc)
+                course = Course(result.class_desc, result.class_code, result.class_number)
+                #Find professors who teach this course
+                myProfessor = EvalResults.objects.filter(class_code=result.class_code,
+                                                         class_number=result.class_number)
+                for prof in myProfessor:
+                    if prof.instr_full_name not in seenP:
+                        seenP.add(result.instr_full_name)
+                        course.addProfessor(Professor(prof.instr_first_name, prof.instr_last_name))
+                foundCourses.add(course)
 
         return render(request, 'main/search.html', {'professors': foundProfs, "courses" : foundCourses})
     else:
