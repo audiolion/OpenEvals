@@ -1,5 +1,7 @@
 from django.shortcuts import get_list_or_404, render
 from django.shortcuts import render_to_response
+from django.db.models import Q
+from functools import reduce
 from .models import *
 
 def index(request):
@@ -46,8 +48,15 @@ def professor(request, lastname, firstname):
     # Removes duplicate classes that the professor teaches
     seen = set()
     courses = [x for x in prof if x.class_code not in seen and not seen.add(x.class_code)]
-
-    return render(request, 'main/professor.html', {'firstname': firstname,'lastname':lastname, 'questions': questions, 'ratings': q_ratings, 'courses': courses})
+    
+    # Get all results for classes this professor teaches
+    similar_profs_query = reduce(lambda q,course: q|Q(class_code=course.class_code), courses, Q())
+    sim_profs = EvalResults.objects.filter(similar_profs_query)
+    # Removes duplicate professors
+    prof_seen = set()
+    similar_profs = [x for x in sim_profs if x.instr_full_name not in seen and not seen.add(x.instr_full_name)]
+    
+    return render(request, 'main/professor.html', {'firstname': firstname,'lastname':lastname, 'questions': questions, 'ratings': q_ratings, 'courses': courses,'sim_profs': similar_profs})
     
 def course(request, coursecode, coursenumber):
     return render_to_response('main/course.html', {'coursecode': coursecode,'coursenumber':coursenumber})
