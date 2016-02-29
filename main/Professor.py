@@ -7,10 +7,14 @@ class Professor():
         self.fname = firstname
         self.lname = lastname
         self.tileCourses = [] #courses that are displayed in tile
+        self.ellipses = ""
     def addCourse(self, course):
         self.courses.add(course)
         if(len(self.tileCourses) < 3):
             self.tileCourses.append(course)
+
+        if(len(self.tileCourses) == 3):
+            self.ellipses = "..."
     def setCommonCourse(self):
         codes = list()
         for course in self.courses:

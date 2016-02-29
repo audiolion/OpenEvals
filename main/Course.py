@@ -7,6 +7,8 @@ class Course():
         self.number = number
         self.professors = set()
         self.ellipses = ""
+        self.numSections = 0
+        self.campus = set()
     def getName(self):
         return self.code + "-" + self.number
 
