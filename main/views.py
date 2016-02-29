@@ -51,7 +51,7 @@ def professor(request, lastname, firstname):
     
     # Get all results for classes this professor teaches
     similar_profs_query = reduce(lambda q,course: q|Q(class_code=course.class_code), courses, Q())
-    sim_profs = EvalResults.objects.filter(similar_profs_query)
+    sim_profs = EvalResults.objects.filter(similar_profs_query).exclude(instr_first_name=firstname)
     # Removes duplicate professors
     prof_seen = set()
     similar_profs = [x for x in sim_profs if x.instr_full_name not in seen and not seen.add(x.instr_full_name)]
