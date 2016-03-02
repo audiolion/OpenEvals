@@ -3,6 +3,7 @@ from django.shortcuts import render_to_response
 from itertools import chain
 from .models import *
 from .Professor import *
+from .Course import *
 
 def index(request):
     return render(request, 'main/index.html')
