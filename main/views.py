@@ -10,15 +10,15 @@ def index(request):
 
 def about(request):
     return render(request, 'main/about.html')
-    
+
 def search(request, searchQ):
-    if request.method == 'POST':
-        searchPOST = request.POST["search"]
+    if request.method == 'GET' and len(request.GET) > 0:
+        searchData = request.GET["search"]
         #Create professor set to pass to the template
-        data = searchPOST.split()
+        data = searchData.split()
 
         foundProfs = professorsSearch(data)
-        foundCourses = coursesSearch(data, searchPOST)
+        foundCourses = coursesSearch(data, searchData)
 
         return render(request, 'main/search.html', {'professors': foundProfs, "courses" : foundCourses},)
     else:
@@ -37,7 +37,7 @@ def professor(request, lastname, firstname):
 
 
     return render_to_response('main/professor.html', {'firstname': firstname,'lastname':lastname})
-    
+
 def course(request, coursecode, coursenumber):
     return render_to_response('main/course.html', {'coursecode': coursecode,'coursenumber':coursenumber})
 
@@ -96,7 +96,3 @@ def coursesSearch(searchQuery, searchPOST):
                     course.addProfessor(Professor(prof.instr_first_name, prof.instr_last_name))
             foundCourses.append(course)
     return foundCourses
-
-
-
-
