@@ -14,10 +14,9 @@ def about(request):
 def search(request, searchQ):
     if request.method == 'GET' and len(request.GET) > 0:
         searchData = request.GET["search"]
-        #Create professor set to pass to the template
         data = searchData.split()
 
-        foundProfs = professorsSearch(data)
+        foundProfs = professorsSearch(data, searchData)
         foundCourses = coursesSearch(data, searchData)
 
         return render(request, 'main/search.html', {'professors': foundProfs, "courses" : foundCourses},)
@@ -44,10 +43,14 @@ def course(request, coursecode, coursenumber):
 '''
 HELPER METHODS
 '''
-def professorsSearch(searchQuery):
-    results = EvalResults.objects.filter(instr_last_name__in= searchQuery) #search by last name
-    if(results.exists() == False):
-        results = EvalResults.objects.filter(instr_first_name__in=searchQuery) #search by first name
+def professorsSearch(searchQuery, searchPOST):
+    dataObjects = EvalResults.objects.all()
+    lastname = dataObjects.filter(instr_last_name__in= searchQuery) #search by last name
+    firstname = dataObjects.filter(instr_first_name__in=searchQuery) #search by first name
+    startsL = dataObjects.filter(instr_last_name__istartswith=searchPOST) #search by beginning of last name
+    startsF = dataObjects.filter(instr_first_name__istartswith=searchPOST) #search by beginning of first name
+    #combine results from search methods above
+    results = lastname | firstname | startsL | startsF
 
     foundProfs = set()
     #sets to prevent duplicate results
