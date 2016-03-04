@@ -74,10 +74,31 @@ def professorsSearch(searchQuery, searchPOST):
 
 def coursesSearch(searchQuery, searchPOST):
     seenC = set() #prevent duplicate tiles
-    results = EvalResults.objects.filter(class_code__contains=searchPOST) #search by readable name
-    if(results.exists() == False):
-        results = EvalResults.objects.filter(class_subj__in=searchQuery) #search by course code
+    dataObjects = EvalResults.objects.all()
+    fullName = dataObjects.filter(class_code__contains=searchPOST) #search by readable name
+    subjNumSearch = list()
+    #separate lists because django throws a value error if you try to
+    #lookup an integer database field in a list containing strings and vice versa
+    subjects = list()
+    numbers = list()
+    #split up results in course-number format into a separate
+    #list that can be used for querying the data
+    for item in searchQuery:
+        if '-' in item:
+            subjectNumber = item.split('-')
+            if len(subjectNumber) >= 2:
+                try:
+                    subjects.append(str(subjectNumber[0]))
+                    numbers.append(int(subjectNumber[1]))
+                except ValueError:
+                    continue
 
+    subjNum = dataObjects.filter(class_subj__in=subjects, class_number__in=numbers) #search by subject-number
+    if not subjNum.exists():
+        subjNum = dataObjects.filter(class_subj__in=searchQuery)
+
+    #combine results from above search method
+    results = fullName | subjNum
     foundCourses = list()
     for result in results:
         seenP = set()
