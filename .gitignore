@@ -8,6 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+node_modules/
 env/
 build/
 develop-eggs/
@@ -66,3 +67,5 @@ target/
 .python-version
 
 secrets.py
+
+dev
