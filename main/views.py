@@ -4,6 +4,7 @@ from itertools import chain
 from .models import *
 from .Professor import *
 from .Course import *
+from .forms import SearchForm
 
 def index(request):
     return render(request, 'main/index.html')
@@ -13,21 +14,24 @@ def about(request):
 
 def search(request, searchQ):
     if request.method == 'GET' and len(request.GET) > 0:
-        searchData = request.GET["search"].lower()
-        data = searchData.split()
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            searchData = form.cleaned_data['search'].lower()
+            data = searchData.split()
 
         foundProfs = professorsSearch(data, searchData)
         foundCourses = coursesSearch(data, searchData)
 
-        return render(request, 'main/search.html', {'professors': foundProfs, "courses" : foundCourses},)
+        return render(request, 'main/search.html', {'professors': foundProfs, "courses" : foundCourses, 'search_form' : form },)
     else:
+        form = SearchForm()
         if(searchQ != ""):
             #This is solely for running a search via the common course link
             #in a professor tile. Searching via a url not yet supported
             foundCourses = coursesSearch([searchQ], searchQ)
-            return render(request, 'main/search.html', {"courses" : foundCourses})
+            return render(request, 'main/search.html', {"courses" : foundCourses, 'search_form' : form })
         else:
-            return render(request, 'main/search.html')
+            return render(request, 'main/search.html', {'search_form' : form })
 
 def professor(request, lastname, firstname):
     prof = EvalResults.objects.filter(instr_last_name=lastname,
