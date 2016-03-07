@@ -1,0 +1,48 @@
+{% extends "main/base.html" %}
+
+{% block title %}OpenEvals{% endblock %}
+
+{% block banner %}
+{% load staticfiles %}
+<div class="container-fluid carousel" style="background-image:url({% static "carousel.jpg" %})">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3" style="top:25%;
+         margin-top:15px;">
+        <h2 class="carousel-title text-center">OPEN EVALS</h2>
+        <div class="carousel-description text-center">
+          <h3>Course and Professor Evaluations, for students by students.</h3>
+        </div>
+    </div>
+</div>
+{% endblock banner %}
+
+{% block content %}
+<div class="container">
+  <h2 class="text-center">Learn More</h2>
+  <div class="row">
+    <div class="col-md-4 col-sm-12">
+      <div class="panel panel-default text-center">
+        <div class="panel-body">
+          <h2 class="text-primary">Blurb 1 Title</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <div class="panel panel-default text-center">
+        <div class="panel-body">
+          <h2 class="text-primary">Blurb 2 Title</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <div class="panel panel-default text-center">
+        <div class="panel-body">
+          <h2 class="text-primary">Blurb 3 Title</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

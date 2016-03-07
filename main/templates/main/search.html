@@ -1,0 +1,84 @@
+{% extends "main/base.html" %}
+
+{% block title %}Search OpenEvals{% endblock %}
+
+{% load staticfiles %}
+{% block content %}
+<form class="main" action="{% url 'main:search' "" %}" method="get">
+  <div class="container-fluid campus-carousel" style="background-image:url({% static "carousel.jpg" %})">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <div class="text-center carousel-description"><h3>Search</h3></div>
+      <input index="" name="search" class="form-control input-lg text-center" id="search" placeholder="Search Courses and Professors by name or code">
+    </div>
+  </div>
+  <div class="container">
+    <div class="col-md-6">
+      <h1 class="text-center">Courses</h1>
+      <div class="row">
+        {% for course in courses  %}
+        <a href= "{% url 'main:course_full' course.code course.number %}" >
+          <div class="square col-xs-12">
+            <div class="square-content" style="height:auto;">
+              <div class="row">
+                <div class="col-xs-10"><h2 style="color: black;">{{ course.code}}-{{ course.number }} {{ course.title }}</h2></div>
+                <div class="col-xs-2">
+                  <h2 style="color: black; text-align: right">
+                    {{ course.numSections }}
+                  </h2>
+                </div>
+              </div>
+              <h4 class="primary_link">
+                {% for prof in course.professors %}
+                <a href="{% url 'main:professor_full' prof.fname prof.lname %}" class="primary_link" >
+                  {{ prof.fname }} {{ prof.lname }}&nbsp;
+                </a>
+                {% endfor %}
+                {{ course.ellipses }}
+              </h4>
+              <h4 class="secondary_link">
+                Campuses:
+                {% for campus in course.campus %}
+                {{ campus }}&nbsp;
+                {% endfor %}
+              </h4>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h1 class="text-center">Professors</h1>
+      <div class="row">
+        {% for prof in professors %}
+        <a href= "{% url 'main:professor_full' prof.fname prof.lname  %}" >
+          <div class="square col-xs-12">
+            <div class="square-content" style="height: auto;">
+              <div class="row">
+                <div class="col-xs-6"><h2 style="color: black;">{{ prof.fname }} {{ prof.lname }}</h2></div>
+                <div class="col-xs-6">
+                  <h2 style="color: black; text-align: right">
+                    <a href="{% url 'main:search' prof.commonCourse %}" style="color:black">
+                      {{ prof.commonCourse }}
+                    </a>
+                  </h2>
+                </div>
+              </div>
+              <h4>
+                {% for course in prof.tileCourses %}
+                <a href="{% url 'main:course_full' course.code course.number %}"  class="primary_link">
+                  {{ course.code }}-{{ course.number }}&nbsp;
+                </a>
+                {% endfor %}
+                {{ prof.ellipses }}
+              </h4>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</form>
+
+{% endblock %}
