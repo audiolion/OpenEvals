@@ -13,7 +13,7 @@ def about(request):
 
 def search(request, searchQ):
     if request.method == 'GET' and len(request.GET) > 0:
-        searchData = request.GET["search"]
+        searchData = request.GET["search"].lower()
         data = searchData.split()
 
         foundProfs = professorsSearch(data, searchData)
@@ -76,7 +76,6 @@ def coursesSearch(searchQuery, searchPOST):
     seenC = set() #prevent duplicate tiles
     dataObjects = EvalResults.objects.all()
     fullName = dataObjects.filter(class_code__contains=searchPOST) #search by readable name
-    subjNumSearch = list()
     #separate lists because django throws a value error if you try to
     #lookup an integer database field in a list containing strings and vice versa
     subjects = list()
