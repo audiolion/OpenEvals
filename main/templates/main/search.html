@@ -51,7 +51,7 @@
       <h1 class="text-center">Professors</h1>
       <div class="row">
         {% for prof in professors %}
-        <a href= "{% url 'main:professor_full' prof.fname prof.lname  %}" >
+        <a href= "{% url 'main:professor_full' prof.lname prof.fname  %}" >
           <div class="square col-xs-12">
             <div class="square-content" style="height: auto;">
               <div class="row">
