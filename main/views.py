@@ -72,9 +72,9 @@ def professor(request, lastname, firstname):
     return render(request, 'main/professor.html', {'firstname': firstname,'lastname':lastname, 'questions': questions, 'ratings': q_ratings, 'courses': courses,'sim_profs': similar_profs})
 
 def course(request, coursecode, coursenumber):
-    coursecode = coursecode.title()
-    coursenumber = coursenumber.title()
-    sections = get_list_or_404(EvalResults, class_code=coursecode, class_number=coursenumber)
+    #coursecode = coursecode.title()
+    #coursenumber = coursenumber.title()
+    sections = get_list_or_404(EvalResults, class_subj=coursecode, class_number=coursenumber)
 
     sections_size = len(sections)
 
