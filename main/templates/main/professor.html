@@ -63,5 +63,34 @@
       </tr>
     </table>
   </div>
+  </div>
+
+<div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading text-center"><h2>Courses</h2></div>
+        {% for course in courses %}
+          <a href= "{% url 'main:course_full' course.class_code course.class_number %}" >
+            <div class="square col-md-6">
+              <div class="square-content" style="height:auto;">
+              <h2 style="color: black;">{{ course.class_code}}-{{ course.class_number }} {{ course.class_desc }}</h2>
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+    </div>
+</div>
+<div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading text-center"><h2>Similar Professors</h2></div>
+        {% for prof in sim_profs %}
+          <a href= "{% url 'main:professor_full' prof.instr_last_name prof.instr_first_name %}" >
+            <div class="square col-md-6">
+              <div class="square-content" style="height:auto;">
+              <h2 style="color: black;">{{ prof.instr_full_name }}</h2>
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
