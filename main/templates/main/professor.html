@@ -5,18 +5,17 @@
 {% block banner %}
 {% load staticfiles %}
 <div class="container-fluid campus-carousel"style="background-image:url({% static "carousel.jpg"%})">
-  <div class="col-xs-12 col-sm-6 col-sm-offset-3" style="top:25%; margin-top:15px;">
+  <div class="col-xs-12 col-sm-6 col-sm-offset-3" style="top:25%;">
     <div class="carousel-description text-center"><h1>Professor {{firstname}} {{lastname}}</h1></div>
   </div>
 </div>
-
 {% endblock %}
 
 {% block content %}
+<h2 class="text-center">Questions and Responses</h2>
 <div class="container">
   <div class="panel panel-default">
-    <div class="panel-heading text-center"><h2>Rating</h2></div>
-    <table class="table">  
+    <table class="table">
       <tr>
         <th>Question</th>
         <th>Rating</th>
@@ -64,33 +63,49 @@
     </table>
   </div>
   </div>
+<h2 class="text-center">Courses</h2>
+<div class="container">
+  <div class="row">
+    {% for course in courses %}
+    <a href= "{% url 'main:course_full' course.class_number course.class_number %}" >
+      <div class="square col-md-4">
+        <div class="square-content" style="height:auto;">
+          <div class="row">
+            <div class="col-xs-10"><h2 style="color: black;">{{ course.class_code}}-{{ course.course_title }}</h2></div>
+            <div class="col-xs-2">
+              <h2 style="color: black; text-align: right">
+                {{ course.numSections }}
+              </h2>
+            </div>
+          </div>
+          <h4 class="secondary_link">
+            Campuses:
+            {% for campus in course.campus %}
+            {{ campus }}&nbsp;
+            {% endfor %}
+          </h4>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
 
+<h2 class="text-center">Professors</h2>
 <div class="container">
-    <div class="panel panel-default">
-      <div class="panel-heading text-center"><h2>Courses</h2></div>
-        {% for course in courses %}
-          <a href= "{% url 'main:course_full' course.class_code course.class_number %}" >
-            <div class="square col-md-6">
-              <div class="square-content" style="height:auto;">
-              <h2 style="color: black;">{{ course.class_code}}-{{ course.class_number }} {{ course.class_desc }}</h2>
-              </div>
-            </div>
-          </a>
-        {% endfor %}
-    </div>
+  <div class="row">
+    {% for prof in sim_profs %}
+    <a href= "{% url 'main:professor_full' prof.instr_last_name prof.instr_first_name %}" >
+      <div class="square col-md-4">
+        <div class="square-content" style="height:auto;">
+          <div class="row">
+            <div class="col-xs-10"><h2 style="color: black;">{{ prof.instr_full_name }}</h2></div>
+          </div>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
 </div>
-<div class="container">
-    <div class="panel panel-default">
-      <div class="panel-heading text-center"><h2>Similar Professors</h2></div>
-        {% for prof in sim_profs %}
-          <a href= "{% url 'main:professor_full' prof.instr_last_name prof.instr_first_name %}" >
-            <div class="square col-md-6">
-              <div class="square-content" style="height:auto;">
-              <h2 style="color: black;">{{ prof.instr_full_name }}</h2>
-              </div>
-            </div>
-          </a>
-        {% endfor %}
-    </div>
-</div>
+
 {% endblock %}
