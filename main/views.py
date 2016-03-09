@@ -32,6 +32,7 @@ def search(request, searchQ):
         else:
             return render(request, 'main/search.html')
 
+
 def professor(request, lastname, firstname):
     lastname = lastname.title()
     firstname = firstname.title()
@@ -72,7 +73,32 @@ def professor(request, lastname, firstname):
     return render(request, 'main/professor.html', {'firstname': firstname,'lastname':lastname, 'questions': questions, 'ratings': q_ratings, 'courses': courses,'sim_profs': similar_profs})
 
 def course(request, coursecode, coursenumber):
-    return render_to_response('main/course.html', {'coursecode': coursecode,'coursenumber':coursenumber})
+    #coursecode = coursecode.title()
+    #coursenumber = coursenumber.title()
+    sections = get_list_or_404(EvalResults, class_subj=coursecode, class_number=coursenumber)
+
+    sections_size = len(sections)
+
+    questions = EvalQuestions.objects.all()
+
+    q_ratings = [0] * 10
+
+    for courseScores in sections:
+        q_ratings[0] += courseScores.q1_average
+        q_ratings[1] += courseScores.q2_average
+        q_ratings[2] += courseScores.q3_average
+        q_ratings[3] += courseScores.q4_average
+        q_ratings[4] += courseScores.q5_average
+        q_ratings[5] += courseScores.q6_average
+        q_ratings[6] += courseScores.q7_average
+        q_ratings[7] += courseScores.q8_average
+        q_ratings[8] += courseScores.q9_average
+        q_ratings[9] += courseScores.q10_average
+
+    for index in range(10):
+        q_ratings[index] = round(q_ratings[index] / sections_size, 2)
+
+    return render_to_response('main/course.html', {'coursecode': coursecode,'coursenumber':coursenumber, 'questions': questions, 'ratings': q_ratings})
 
 def handler404(request):
     response = render_to_response('404.html', {}, context_instance=RequestContext(request))

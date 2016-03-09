@@ -17,4 +17,3 @@ class Course():
             self.professors.add(prof)
         if(len(self.professors) == 3):
             self.ellipses = "..."
-

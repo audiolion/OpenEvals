@@ -70,3 +70,5 @@ target/
 secrets.py
 
 dev
+
+.idea/*
