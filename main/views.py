@@ -69,9 +69,24 @@ def professor(request, lastname, firstname):
     # Removes duplicate professors
     prof_seen = set()
     similar_profs = [x for x in sim_profs if x.instr_full_name not in seen and not seen.add(x.instr_full_name)]
+    
+    classes = list()
+    for course in courses:
+        classes.append(create_course(course,firstname,lastname))
 
-    return render(request, 'main/professor.html', {'firstname': firstname,'lastname':lastname, 'questions': questions, 'ratings': q_ratings, 'courses': courses,'sim_profs': similar_profs})
+    return render(request, 'main/professor.html', {'firstname': firstname,'lastname':lastname, 'questions': questions, 'ratings': q_ratings, 'courses': classes,'sim_profs': similar_profs})
 
+def create_course(course, fname, lname):
+    c = Course(course.class_code,course.class_subj,course.class_number)
+    profs = EvalResults.objects.filter(class_subj=course.class_subj, class_number=course.class_number).exclude(instr_last_name=lname)
+    
+    for prof in profs:
+        p = Professor(prof.instr_first_name, prof.instr_last_name)
+        c.addProfessor(p)
+        c.numSections = EvalResults.objects.filter(class_subj=course.class_subj, class_number=course.class_number).count() 
+    
+    return c
+    
 def course(request, coursecode, coursenumber):
     #coursecode = coursecode.title()
     #coursenumber = coursenumber.title()

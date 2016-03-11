@@ -67,22 +67,24 @@
 <div class="container">
   <div class="row">
     {% for course in courses %}
-    <a href= "{% url 'main:course_full' course.class_number course.class_number %}" >
+    <a href= "{% url 'main:course_full' course.code course.number %}" >
       <div class="square col-md-4">
         <div class="square-content" style="height:auto;">
           <div class="row">
-            <div class="col-xs-10"><h2 style="color: black;">{{ course.class_code}}-{{ course.course_desc }}</h2></div>
+            <div class="col-xs-10"><h2 style="color: black;">{{ course.code}}-{{ course.number }}</h2></div>
             <div class="col-xs-2">
               <h2 style="color: black; text-align: right">
-                {{ course.class_section }}
+                {{ course.numSections }}
               </h2>
             </div>
           </div>
-          <h4 class="secondary_link">
-            Campuses:
-            {% for campus in course.campus %}
-            {{ campus }}&nbsp;
+          <h4 class="primary_link">
+            {% for prof in course.professors %}
+              <a href="{% url 'main:professor_full' prof.lname prof.fname %}" class="primary_link">
+                {{prof.fname}} {{prof.lname}}&nbsp;
+              </a> 
             {% endfor %}
+            {{ course.ellipses }}
           </h4>
         </div>
       </div>
