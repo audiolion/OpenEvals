@@ -1,10 +1,11 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import render_to_response
-from itertools import chain
 from .models import *
 from .Professor import *
 from .Course import *
 from .forms import SearchForm
+import json
 
 def index(request):
     return render(request, 'main/index.html')
@@ -123,3 +124,20 @@ def coursesSearch(searchQuery, searchPOST):
                     course.addProfessor(Professor(prof.instr_first_name, prof.instr_last_name))
             foundCourses.append(course)
     return foundCourses
+
+def get_results(request):
+    if request.is_ajax():
+        q = request.GET['term']
+        results = EvalResults.objects.filter(instr_full_name__icontains= q)[:20]
+        found = []
+        for result in results:
+            result_json = {}
+            result_json['id'] = result.id
+            result_json['label'] = result.instr_full_name
+            result_json['value'] = result.instr_full_name
+            found.append(result_json)
+        data = json.dumps(found)
+    else:
+        data = 'fail'
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)
