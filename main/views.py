@@ -99,7 +99,7 @@ def course(request, coursecode, coursenumber):
     for index in range(10):
         q_ratings[index] = round(q_ratings[index] / sections_size, 2)
 
-    return render_to_response('main/course.html', {'coursecode': coursecode,'coursenumber':coursenumber, 'questions': questions, 'ratings': q_ratings})
+    return render_to_response('main/course.html', {'DEBUG': settings.DEBUG, 'coursecode': coursecode,'coursenumber':coursenumber, 'questions': questions, 'ratings': q_ratings})
 
 def handler404(request):
     response = render_to_response('404.html', {}, context_instance=RequestContext(request))
