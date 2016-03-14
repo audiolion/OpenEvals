@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'teacher/(\w+)/(w+)', views.professor, name='professor_full2'),
     url(r'course/(\w+)/(\w+)', views.course, name='course_full'),
     url(r'class/(\w+)/(\w+)', views.course, name='course_full1'),
-    url(r'section/(\w+)/(\w+)', views.course, name='course_full2')
+    url(r'section/(\w+)/(\w+)', views.course, name='course_full2'),
+    url(r'search-autocomplete/', views.get_results, name='search-autocomplete')
 
 ]
