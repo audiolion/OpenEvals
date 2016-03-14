@@ -12,6 +12,13 @@
 {% endblock %}
 
 {% block content %}
+
+{% if not DEBUG %}
+<div class="alert alert-warning">
+  <strong>Please Login</strong> Data is only available if you are logged in.
+</div>
+{% endif %}
+
 <h2 class="text-center">Questions and Responses</h2>
 <div class="container">
   <div class="panel panel-default">

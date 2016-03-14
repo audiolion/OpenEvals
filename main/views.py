@@ -2,6 +2,7 @@ from django.shortcuts import get_list_or_404, render
 from django.shortcuts import render_to_response
 from django.template  import RequestContext
 from django.db.models import Q
+from django.conf import settings
 from functools import reduce
 from itertools import chain
 from .models import *
@@ -70,7 +71,7 @@ def professor(request, lastname, firstname):
     prof_seen = set()
     similar_profs = [x for x in sim_profs if x.instr_full_name not in seen and not seen.add(x.instr_full_name)]
 
-    return render(request, 'main/professor.html', {'firstname': firstname,'lastname':lastname, 'questions': questions, 'ratings': q_ratings, 'courses': courses,'sim_profs': similar_profs})
+    return render(request, 'main/professor.html', {'DEBUG': settings.DEBUG, 'firstname': firstname,'lastname':lastname, 'questions': questions, 'ratings': q_ratings, 'courses': courses,'sim_profs': similar_profs})
 
 def course(request, coursecode, coursenumber):
     #coursecode = coursecode.title()
