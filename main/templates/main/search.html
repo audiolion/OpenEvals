@@ -4,14 +4,11 @@
 
 {% load staticfiles %}
 {% block content %}
-
+<form class="main" action="{% url 'main:search' "" %}" method="get">
   <div class="container-fluid campus-carousel" style="background-image:url({% static "carousel.jpg" %})">
     <div class="col-xs-12 col-sm-6 col-sm-offset-3">
       <div class="text-center carousel-description"><h3>Search</h3></div>
-        <form class="main" action="{% url 'main:search' "" %}" method="get">
-            {% csrf_token %}
-            {{ search_form }}
-        </form>
+      <input index="" name="search" class="form-control input-lg text-center" id="search" placeholder="Search Courses and Professors by name or code">
     </div>
   </div>
   <div class="container">
@@ -82,8 +79,6 @@
       </div>
     </div>
   </div>
-{% block footer %}
-    {{ search_form.media }}
-{% endblock %}
+</form>
 
 {% endblock %}

@@ -1,5 +1,3 @@
-from django.http import HttpResponse
-from django.shortcuts import render
 from django.shortcuts import get_list_or_404, render
 from django.shortcuts import render_to_response
 from django.template  import RequestContext
@@ -9,8 +7,6 @@ from itertools import chain
 from .models import *
 from .Professor import *
 from .Course import *
-from .forms import SearchForm
-import json
 
 def index(request):
     return render(request, 'main/index.html')
@@ -20,24 +16,22 @@ def about(request):
 
 def search(request, searchQ):
     if request.method == 'GET' and len(request.GET) > 0:
-        form = SearchForm(request.GET)
-        if form.is_valid():
-            searchData = form.cleaned_data['search'].lower()
-            data = searchData.split()
+        searchData = request.GET["search"]
+        data = searchData.split()
 
-        foundProfs = professorsSearch(searchData)
+        foundProfs = professorsSearch(data, searchData)
         foundCourses = coursesSearch(data, searchData)
 
-        return render(request, 'main/search.html', {'professors': foundProfs, "courses" : foundCourses, 'search_form' : form },)
+        return render(request, 'main/search.html', {'professors': foundProfs, "courses" : foundCourses},)
     else:
-        form = SearchForm()
         if(searchQ != ""):
             #This is solely for running a search via the common course link
             #in a professor tile. Searching via a url not yet supported
             foundCourses = coursesSearch([searchQ], searchQ)
-            return render(request, 'main/search.html', {"courses" : foundCourses, 'search_form' : form })
+            return render(request, 'main/search.html', {"courses" : foundCourses})
         else:
-            return render(request, 'main/search.html', {'search_form' : form })
+            return render(request, 'main/search.html')
+
 
 def professor(request, lastname, firstname):
     lastname = lastname.title()
@@ -114,13 +108,14 @@ def handler404(request):
 '''
 HELPER METHODS
 '''
-def professorsSearch(searchPOST):
+def professorsSearch(searchQuery, searchPOST):
     dataObjects = EvalResults.objects.all()
-    startsFull = dataObjects.filter(instr_full_name__istartswith=searchPOST) #search by first name
+    lastname = dataObjects.filter(instr_last_name__in= searchQuery) #search by last name
+    firstname = dataObjects.filter(instr_first_name__in=searchQuery) #search by first name
     startsL = dataObjects.filter(instr_last_name__istartswith=searchPOST) #search by beginning of last name
     startsF = dataObjects.filter(instr_first_name__istartswith=searchPOST) #search by beginning of first name
     #combine results from search methods above
-    results = startsFull | startsL | startsF
+    results = lastname | firstname | startsL | startsF
 
     foundProfs = set()
     #sets to prevent duplicate results
@@ -145,7 +140,8 @@ def professorsSearch(searchPOST):
 def coursesSearch(searchQuery, searchPOST):
     seenC = set() #prevent duplicate tiles
     dataObjects = EvalResults.objects.all()
-    fullName = dataObjects.filter(class_code__istartswith=searchPOST) #search by readable name
+    fullName = dataObjects.filter(class_code__contains=searchPOST) #search by readable name
+    subjNumSearch = list()
     #separate lists because django throws a value error if you try to
     #lookup an integer database field in a list containing strings and vice versa
     subjects = list()
@@ -164,7 +160,7 @@ def coursesSearch(searchQuery, searchPOST):
 
     subjNum = dataObjects.filter(class_subj__in=subjects, class_number__in=numbers) #search by subject-number
     if not subjNum.exists():
-        subjNum = dataObjects.filter(class_subj__istartswith=searchPOST)
+        subjNum = dataObjects.filter(class_subj__in=searchQuery)
 
     #combine results from above search method
     results = fullName | subjNum
@@ -189,42 +185,3 @@ def coursesSearch(searchQuery, searchPOST):
                     course.addProfessor(Professor(prof.instr_first_name, prof.instr_last_name))
             foundCourses.append(course)
     return foundCourses
-
-'''
-AUTOCOMPLETE VIEW
-'''
-def get_results(request):
-    if request.is_ajax():
-        currSearch = request.GET['term']
-        profs = EvalResults.objects.filter(instr_full_name__icontains=currSearch)[:3]
-        courses = EvalResults.objects.filter(class_code__istartswith=currSearch)[:3]
-        if not courses.exists():
-            courses = EvalResults.objects.filter(class_subj__istartswith=currSearch)[:3]
-        foundC = []
-        foundP = []
-        #sets to prevent duplicate results
-        seenP = set()
-        seenC = set()
-        for result in profs:
-            if result.instr_full_name not in seenP:
-                seenP.add(result.instr_full_name)
-                result_json = {}
-                result_json['id'] = result.id
-                result_json['label'] = result.instr_full_name
-                result_json['value'] = result.instr_full_name
-                foundP.append(result_json)
-        for result in courses:
-            if result.class_code not in seenC:
-                seenC.add(result.class_code)
-                result_json = {}
-                result_json['id'] = result.id
-                result_json['label'] = result.class_code
-                result_json['value'] = result.class_code
-                foundC.append(result_json)
-
-        found = foundC + foundP
-        data = json.dumps(found)
-    else:
-        data = 'fail'
-    mimetype = 'application/json'
-    return HttpResponse(data, mimetype)

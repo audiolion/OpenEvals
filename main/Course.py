@@ -2,10 +2,8 @@
 from collections import Counter
 class Course():
     def __init__(self, desc, code, number):
-        self.title = ""
-        for descword in desc.split():
-            self.title += descword.capitalize() + ' '
-        self.code = code.upper()
+        self.title = desc
+        self.code = code
         self.number = number
         self.professors = set()
         self.ellipses = ""

@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'static_precompiler',
     'compressor',
-
 ]
 COMPRESS_ENABLED=True
 COMPRESS_PRECOMPILERS = (
@@ -116,14 +115,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'dev'
     },
-    #'oracle' :{
-        #'ENGINE': 'django.db.backends.oracle',
-        #'NAME': secrets.ORACLE_NAME,
-        #'USER': secrets.ORACLE_USER,
-        #'PASSWORD': secrets.ORACLE_PASSWORD,
-        #'HOST': secrets.ORACLE_HOST,
-        #'PORT': secrets.ORACLE_PORT,
-    #}
+
 
 }
 
