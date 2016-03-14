@@ -4,14 +4,16 @@
     <title>{% block title %}OpenEvals{% endblock %}</title>
     {% load staticfiles %}
     {% load compress %}
-    <script src="{% static 'js/jquery-1.12.1.min.js' %}"></script>
+    <script src="{% static 'js/jquery-1.7.1.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/search-autocomplete.js' %}"></script>
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script src="{% static 'js/jquery-1.12.1.min.js' %}"></script>
     {% compress css %}
     <link rel="stylesheet" type="text/less" media="all" href="{% static 'less/style.less' %}" />
     {% endcompress %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.css' %}"/>
 </head>
 <body>
   <nav class="header-background navbar navbar-default navbar-fixed-top" role="navigation">
