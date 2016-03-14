@@ -20,7 +20,7 @@ def search(request, searchQ):
             searchData = form.cleaned_data['search'].lower()
             data = searchData.split()
 
-        foundProfs = professorsSearch(data, searchData)
+        foundProfs = professorsSearch(searchData)
         foundCourses = coursesSearch(data, searchData)
 
         return render(request, 'main/search.html', {'professors': foundProfs, "courses" : foundCourses, 'search_form' : form },)
@@ -48,14 +48,13 @@ def course(request, coursecode, coursenumber):
 '''
 HELPER METHODS
 '''
-def professorsSearch(searchQuery, searchPOST):
+def professorsSearch(searchPOST):
     dataObjects = EvalResults.objects.all()
-    lastname = dataObjects.filter(instr_last_name__in= searchQuery) #search by last name
-    firstname = dataObjects.filter(instr_first_name__in=searchQuery) #search by first name
+    startsFull = dataObjects.filter(instr_full_name__istartswith=searchPOST) #search by first name
     startsL = dataObjects.filter(instr_last_name__istartswith=searchPOST) #search by beginning of last name
     startsF = dataObjects.filter(instr_first_name__istartswith=searchPOST) #search by beginning of first name
     #combine results from search methods above
-    results = lastname | firstname | startsL | startsF
+    results = startsFull | startsL | startsF
 
     foundProfs = set()
     #sets to prevent duplicate results
@@ -80,7 +79,7 @@ def professorsSearch(searchQuery, searchPOST):
 def coursesSearch(searchQuery, searchPOST):
     seenC = set() #prevent duplicate tiles
     dataObjects = EvalResults.objects.all()
-    fullName = dataObjects.filter(class_code__contains=searchPOST) #search by readable name
+    fullName = dataObjects.filter(class_code__istartswith=searchPOST) #search by readable name
     #separate lists because django throws a value error if you try to
     #lookup an integer database field in a list containing strings and vice versa
     subjects = list()
@@ -99,7 +98,7 @@ def coursesSearch(searchQuery, searchPOST):
 
     subjNum = dataObjects.filter(class_subj__in=subjects, class_number__in=numbers) #search by subject-number
     if not subjNum.exists():
-        subjNum = dataObjects.filter(class_subj__in=searchQuery)
+        subjNum = dataObjects.filter(class_subj__istartswith=searchPOST)
 
     #combine results from above search method
     results = fullName | subjNum
@@ -125,17 +124,39 @@ def coursesSearch(searchQuery, searchPOST):
             foundCourses.append(course)
     return foundCourses
 
+'''
+AUTOCOMPLETE VIEW
+'''
 def get_results(request):
     if request.is_ajax():
-        q = request.GET['term']
-        results = EvalResults.objects.filter(instr_full_name__icontains= q)[:20]
-        found = []
-        for result in results:
-            result_json = {}
-            result_json['id'] = result.id
-            result_json['label'] = result.instr_full_name
-            result_json['value'] = result.instr_full_name
-            found.append(result_json)
+        currSearch = request.GET['term']
+        profs = EvalResults.objects.filter(instr_full_name__icontains=currSearch)[:3]
+        courses = EvalResults.objects.filter(class_code__istartswith=currSearch)[:3]
+        if not courses.exists():
+            courses = EvalResults.objects.filter(class_subj__istartswith=currSearch)[:3]
+        foundC = []
+        foundP = []
+        #sets to prevent duplicate results
+        seenP = set()
+        seenC = set()
+        for result in profs:
+            if result.instr_full_name not in seenP:
+                seenP.add(result.instr_full_name)
+                result_json = {}
+                result_json['id'] = result.id
+                result_json['label'] = result.instr_full_name
+                result_json['value'] = result.instr_full_name
+                foundP.append(result_json)
+        for result in courses:
+            if result.class_code not in seenC:
+                seenC.add(result.class_code)
+                result_json = {}
+                result_json['id'] = result.id
+                result_json['label'] = result.class_code
+                result_json['value'] = result.class_code
+                foundC.append(result_json)
+
+        found = foundC + foundP
         data = json.dumps(found)
     else:
         data = 'fail'
