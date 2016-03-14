@@ -1,6 +1,11 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.shortcuts import get_list_or_404, render
 from django.shortcuts import render_to_response
+from django.template  import RequestContext
+from django.db.models import Q
+from functools import reduce
+from itertools import chain
 from .models import *
 from .Professor import *
 from .Course import *
@@ -35,15 +40,76 @@ def search(request, searchQ):
             return render(request, 'main/search.html', {'search_form' : form })
 
 def professor(request, lastname, firstname):
-    prof = EvalResults.objects.filter(instr_last_name=lastname,
-                                      instr_first_name=firstname)
+    lastname = lastname.title()
+    firstname = firstname.title()
+    prof = get_list_or_404(EvalResults, instr_last_name=lastname, instr_first_name=firstname)
+
+    prof_size = len(prof)
+
     questions = EvalQuestions.objects.all()
 
+    q_ratings = [0] * 10
 
-    return render_to_response('main/professor.html', {'firstname': firstname,'lastname':lastname})
+    # Average question ratings
+    for professor in prof:
+        q_ratings[0] += professor.q1_average
+        q_ratings[1] += professor.q2_average
+        q_ratings[2] += professor.q3_average
+        q_ratings[3] += professor.q4_average
+        q_ratings[4] += professor.q5_average
+        q_ratings[5] += professor.q6_average
+        q_ratings[6] += professor.q7_average
+        q_ratings[7] += professor.q8_average
+        q_ratings[8] += professor.q9_average
+        q_ratings[9] += professor.q10_average
+    for index in range(10):
+        q_ratings[index] = round(q_ratings[index] / prof_size, 2)
+
+    # Removes duplicate classes that the professor teaches
+    seen = set()
+    courses = [x for x in prof if x.class_code not in seen and not seen.add(x.class_code)]
+
+    # Get all results for classes this professor teaches
+    similar_profs_query = reduce(lambda q,course: q|Q(class_code=course.class_code), courses, Q())
+    sim_profs = EvalResults.objects.filter(similar_profs_query).exclude(instr_first_name=firstname)
+    # Removes duplicate professors
+    prof_seen = set()
+    similar_profs = [x for x in sim_profs if x.instr_full_name not in seen and not seen.add(x.instr_full_name)]
+
+    return render(request, 'main/professor.html', {'firstname': firstname,'lastname':lastname, 'questions': questions, 'ratings': q_ratings, 'courses': courses,'sim_profs': similar_profs})
 
 def course(request, coursecode, coursenumber):
-    return render_to_response('main/course.html', {'coursecode': coursecode,'coursenumber':coursenumber})
+    #coursecode = coursecode.title()
+    #coursenumber = coursenumber.title()
+    sections = get_list_or_404(EvalResults, class_subj=coursecode, class_number=coursenumber)
+
+    sections_size = len(sections)
+
+    questions = EvalQuestions.objects.all()
+
+    q_ratings = [0] * 10
+
+    for courseScores in sections:
+        q_ratings[0] += courseScores.q1_average
+        q_ratings[1] += courseScores.q2_average
+        q_ratings[2] += courseScores.q3_average
+        q_ratings[3] += courseScores.q4_average
+        q_ratings[4] += courseScores.q5_average
+        q_ratings[5] += courseScores.q6_average
+        q_ratings[6] += courseScores.q7_average
+        q_ratings[7] += courseScores.q8_average
+        q_ratings[8] += courseScores.q9_average
+        q_ratings[9] += courseScores.q10_average
+
+    for index in range(10):
+        q_ratings[index] = round(q_ratings[index] / sections_size, 2)
+
+    return render_to_response('main/course.html', {'coursecode': coursecode,'coursenumber':coursenumber, 'questions': questions, 'ratings': q_ratings})
+
+def handler404(request):
+    response = render_to_response('404.html', {}, context_instance=RequestContext(request))
+    response.status_code = 404
+    return response
 
 '''
 HELPER METHODS

@@ -8,6 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+node_modules/
 env/
 build/
 develop-eggs/
@@ -44,6 +45,7 @@ nosetests.xml
 coverage.xml
 *,cover
 .hypothesis/
+.ropeproject/
 
 # Translations
 *.mo
@@ -66,3 +68,7 @@ target/
 .python-version
 
 secrets.py
+
+dev
+
+.idea/*

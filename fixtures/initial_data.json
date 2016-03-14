@@ -1,0 +1,92 @@
+[
+  {
+    "model": "main.EvalQuestions",
+    "pk": 1,
+    "fields": {
+      "number": "1",
+      "title": "Quality",
+      "text": "Did this professor provide quality instruction?"
+    }
+  },
+  {
+    "model": "main.EvalQuestions",
+    "pk": 2,
+    "fields": {
+      "number": "2",
+      "title": "Timeliness",
+      "text": "Did this professor return tests and quizzes in a timely fashion?"
+    }
+  },
+  {
+    "model": "main.EvalQuestions",
+    "pk": 3,
+    "fields": {
+      "number": "3",
+      "title": "Mycourses",
+      "text": "Did this professor use MyCourses"
+    }
+  },
+  {
+    "model": "main.EvalQuestions",
+    "pk": 4,
+    "fields": {
+      "number": "4",
+      "title": "Textbook",
+      "text": "Did this course make good use of the textbook?"
+    }
+  },
+  {
+    "model": "main.EvalResults",
+    "pk": 1,
+    "fields": {
+      "term_code": "2161",
+      "class_code": "261",
+      "class_desc": "Introduction to Software Engineering",
+      "instr_full_name": "Kenneth Martinez",
+      "instr_last_name": "Martinez",
+      "instr_first_name": "Kenneth",
+      "class_subj": "SWEN",
+      "class_cat_nbr": "",
+      "class_section": "01",
+      "class_number": "13563",
+      "q1_average": "76.95",
+      "q2_average": "64.56",
+      "q3_average": "55.67",
+      "q4_average" : "99.75",
+      "q5_average" : "33.45",
+      "q6_average" : "63.45",
+      "q7_average" : "64.23",
+      "q8_average" : "71.35",
+      "q9_average" : "57.89",
+      "q10_average" : "98.23",
+      "campus" : "RIT Main"
+    }
+  },
+  {
+    "model": "main.EvalResults",
+    "pk": 2,
+    "fields": {
+      "term_code": "2161",
+      "class_code": "250",
+      "class_desc": "Concepts of Computer Systems",
+      "instr_full_name": "Phillip WHite",
+      "instr_last_name": "White",
+      "instr_first_name": "Phillip",
+      "class_subj": "CSCI",
+      "class_cat_nbr": "",
+      "class_section": "01",
+      "class_number": "50797",
+      "q1_average": "76.95",
+      "q2_average": "64.56",
+      "q3_average": "55.67",
+      "q4_average" : "99.75",
+      "q5_average" : "33.45",
+      "q6_average" : "63.45",
+      "q7_average" : "64.23",
+      "q8_average" : "71.35",
+      "q9_average" : "57.89",
+      "q10_average" : "98.23",
+      "campus" : "RIT Main"
+    }
+  }
+]
