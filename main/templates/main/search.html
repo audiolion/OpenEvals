@@ -32,7 +32,7 @@
               </div>
               <h4 class="primary_link">
                 {% for prof in course.professors %}
-                <a href="{% url 'main:professor_full' prof.fname prof.lname %}" class="primary_link" >
+                <a href="{% url 'main:professor_full' prof.lname prof.fname %}" class="primary_link" >
                   {{ prof.fname }} {{ prof.lname }}&nbsp;
                 </a>
                 {% endfor %}
