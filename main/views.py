@@ -39,6 +39,9 @@ def search(request, searchQ):
         else:
             return render(request, 'main/search.html', {'search_form' : form })
 
+def professor_listing(request):
+    return render('',request)
+
 def professor(request, lastname, firstname):
     lastname = lastname.title()
     firstname = firstname.title()
