@@ -40,7 +40,7 @@ def search(request, searchQ):
             return render(request, 'main/search.html', {'search_form' : form })
 
 def professor_listing(request):
-    return render('',request)
+    return render(request, 'main/professor_listing.html')
 
 def professor(request, lastname, firstname):
     lastname = lastname.title()

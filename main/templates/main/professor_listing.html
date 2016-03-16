@@ -1,0 +1,14 @@
+{% extends "main/base.html" %}
+
+{% block title %} Professors {% endblock %}
+
+{% block banner %}
+{% load staticfiles %}
+<div class="container-fluid campus-carousel"style="background-image:url({% static "carousel.jpg"%})">
+  <div class="col-xs-12 col-sm-6 col-sm-offset-3" style="top:25%;">
+    <div class="carousel-description text-center"><h1>Professor {{firstname}} {{lastname}}</h1></div>
+  </div>
+</div>
+{% endblock %}
+{% block content %}
+{% endblock %}
