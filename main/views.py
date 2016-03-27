@@ -21,14 +21,16 @@ def about(request):
 def search(request, searchQ):
     if request.method == 'GET' and len(request.GET) > 0:
         form = SearchForm(request.GET)
-        if form.is_valid():
+        if(form.is_valid()):
+            if form.cleaned_data['search'].lower() == '': #csrf breaks form length test in prod
+                return render(request, 'main/search.html', {'search_form': form})
             searchData = form.cleaned_data['search'].lower()
             data = searchData.split()
 
-        foundProfs = professorsSearch(searchData)
-        foundCourses = coursesSearch(data, searchData)
-
-        return render(request, 'main/search.html', {'professors': foundProfs, "courses" : foundCourses, 'search_form' : form },)
+            foundProfs = professorsSearch(searchData)
+            foundCourses = coursesSearch(data, searchData)
+            return render(request, 'main/search.html', {'professors': foundProfs, "courses" : foundCourses, 'search_form' : form },)
+        return render(request, 'main/search.html', {'search_form' : form})
     else:
         form = SearchForm()
         if(searchQ != ""):
@@ -85,7 +87,7 @@ def professor(request, lastname, firstname):
     return render(request, 'main/professor.html', {'firstname': firstname,'lastname':lastname, 'questions': questions, 'ratings': q_ratings, 'courses': classes,'sim_profs': similar_profs})
 
 def create_course(course, fname, lname):
-    c = Course(course.class_code,course.class_subj,course.class_number)
+    c = Course(course.class_code,course.class_subj,course.class_cat_nbr)
     profs = EvalResults.objects.filter(class_subj=course.class_subj, class_number=course.class_number).exclude(instr_last_name=lname)
     for prof in profs:
         p = Professor(prof.instr_first_name, prof.instr_last_name)
@@ -111,7 +113,7 @@ def course(request, subj, classcatnbr):
         q_ratings[2] += courseScores.q3_average
         q_ratings[3] += courseScores.q4_average
         q_ratings[4] += courseScores.q5_average
-        #q_ratings[5] += courseScores.q6_average
+        q_ratings[5] += courseScores.q6_average
         #q_ratings[6] += courseScores.q7_average
         #q_ratings[7] += courseScores.q8_average
         #q_ratings[8] += courseScores.q9_average
@@ -151,8 +153,8 @@ def professorsSearch(searchPOST):
                                       instr_last_name=result.instr_last_name)
             for c in myCourse:
                 if c.class_desc not in seenC:
-                    seenC.add(c.class_csubj)
-                    p.addCourse(Course(c.class_subj, c.class_subj, str(c.class_cat_nbr)))
+                    seenC.add(c.class_subj)
+                    p.addCourse(Course(c.class_subj, c.class_subj, str(c.class_cat_nbr), c.class_desc))
 
             p.setCommonCourse()
             foundProfs.add(p)
@@ -189,7 +191,7 @@ def coursesSearch(searchQuery, searchPOST):
         seenP = set()
         if result.class_code not in seenC:
             seenC.add(result.class_code)
-            course = Course(result.class_code, result.class_subj, result.class_number)
+            course = Course(result.class_code, result.class_subj, result.class_cat_nbr, result.class_desc)
             #calculate how many sections there are
             allSections = results.filter(class_subj=result.class_subj, class_number=result.class_number)
             course.numSections = allSections.count()
@@ -203,7 +205,6 @@ def coursesSearch(searchQuery, searchPOST):
                 if prof.instr_full_name not in seenP:
                     seenP.add(result.instr_full_name)
                     course.addProfessor(Professor(prof.instr_first_name, prof.instr_last_name))
-            foundCourses.append(course)
     return foundCourses
 
 '''

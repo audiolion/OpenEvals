@@ -16,10 +16,10 @@ class Professor():
         if(len(self.tileCourses) == 3): #add the ellipses if this tile has 3 courses
             self.ellipses = "..."
     def setCommonCourse(self):
-        codes = list()
+        subjects = list()
         for course in self.courses:
-            codes.append(course.code)
-        counts = Counter(codes)
+            subjects.append(course.subj)
+        counts = Counter(subjects)
         #(1) is to start returned list at 1st most common
         #[0] is the first [value, index] pair
         #[0] is the most common value -> what we want
