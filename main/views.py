@@ -72,11 +72,11 @@ def professor(request, lastname, firstname):
     # Get all results for classes this professor teaches
     similar_profs_query = reduce(lambda q,course: q|Q(class_code=course.class_code), courses, Q())
     sim_profs = EvalResults.objects.filter(similar_profs_query).exclude(instr_first_name=firstname)
-    
+
     # Removes duplicate professors
     prof_seen = set()
     similar_profs = [x for x in sim_profs if x.instr_full_name not in seen and not seen.add(x.instr_full_name)]
-   
+
     # Creates list of Course objects
     classes = list()
     for course in courses:
@@ -90,8 +90,8 @@ def create_course(course, fname, lname):
     for prof in profs:
         p = Professor(prof.instr_first_name, prof.instr_last_name)
         c.addProfessor(p)
-        c.numSections = EvalResults.objects.filter(class_subj=course.class_subj, class_number=course.class_number).count() 
-    
+        c.numSections = EvalResults.objects.filter(class_subj=course.class_subj, class_number=course.class_number).count()
+
     return c
 
 def course(request, subj, classcatnbr):
@@ -151,8 +151,8 @@ def professorsSearch(searchPOST):
                                       instr_last_name=result.instr_last_name)
             for c in myCourse:
                 if c.class_desc not in seenC:
-                    seenC.add(c.class_code)
-                    p.addCourse(Course(c.class_code, c.class_subj, str(c.class_number)))
+                    seenC.add(c.class_csubj)
+                    p.addCourse(Course(c.class_subj, c.class_subj, str(c.class_cat_nbr)))
 
             p.setCommonCourse()
             foundProfs.add(p)

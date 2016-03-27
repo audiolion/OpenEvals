@@ -1,12 +1,12 @@
 #This is to group information about courses
 from collections import Counter
 class Course():
-    def __init__(self, desc, code, number):
+    def __init__(self, desc, subj, classcatnbr):
         self.title = ""
         for descword in desc.split():
             self.title += descword.capitalize() + ' '
-        self.code = code.upper()
-        self.number = number
+        self.subj = subj.upper()
+        self.classcatnbr = classcatnbr
         self.professors = set()
         self.ellipses = ""
         self.numSections = 0

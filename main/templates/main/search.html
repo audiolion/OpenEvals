@@ -70,7 +70,7 @@
               <h4>
                 {% for course in prof.tileCourses %}
                 <a href="{% url 'main:course_full' course.code course.number %}"  class="primary_link">
-                  {{ course.code }}-{{ course.number }}&nbsp;
+                  {{ course.subj }}-{{ course.classcatnbr }}&nbsp;
                 </a>
                 {% endfor %}
                 {{ prof.ellipses }}
