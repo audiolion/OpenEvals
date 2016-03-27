@@ -58,11 +58,11 @@ def professor(request, lastname, firstname):
         q_ratings[3] += professor.q4_average
         q_ratings[4] += professor.q5_average
         q_ratings[5] += professor.q6_average
-        q_ratings[6] += professor.q7_average
-        q_ratings[7] += professor.q8_average
-        q_ratings[8] += professor.q9_average
-        q_ratings[9] += professor.q10_average
-    for index in range(10):
+        #q_ratings[6] += professor.q7_average
+        #q_ratings[7] += professor.q8_average
+        #q_ratings[8] += professor.q9_average
+        #q_ratings[9] += professor.q10_average
+    for index in range(6):
         q_ratings[index] = round(q_ratings[index] / prof_size, 2)
 
     # Removes duplicate classes that the professor teaches
@@ -87,18 +87,17 @@ def professor(request, lastname, firstname):
 def create_course(course, fname, lname):
     c = Course(course.class_code,course.class_subj,course.class_number)
     profs = EvalResults.objects.filter(class_subj=course.class_subj, class_number=course.class_number).exclude(instr_last_name=lname)
-    
     for prof in profs:
         p = Professor(prof.instr_first_name, prof.instr_last_name)
         c.addProfessor(p)
         c.numSections = EvalResults.objects.filter(class_subj=course.class_subj, class_number=course.class_number).count() 
     
     return c
-    
-def course(request, coursecode, coursenumber):
+
+def course(request, subj, classcatnbr):
     #coursecode = coursecode.title()
     #coursenumber = coursenumber.title()
-    sections = get_list_or_404(EvalResults, class_subj=coursecode, class_number=coursenumber)
+    sections = get_list_or_404(EvalResults, class_subj=subj, class_cat_nbr=classcatnbr)
 
     sections_size = len(sections)
 
@@ -112,16 +111,16 @@ def course(request, coursecode, coursenumber):
         q_ratings[2] += courseScores.q3_average
         q_ratings[3] += courseScores.q4_average
         q_ratings[4] += courseScores.q5_average
-        q_ratings[5] += courseScores.q6_average
-        q_ratings[6] += courseScores.q7_average
-        q_ratings[7] += courseScores.q8_average
-        q_ratings[8] += courseScores.q9_average
-        q_ratings[9] += courseScores.q10_average
+        #q_ratings[5] += courseScores.q6_average
+        #q_ratings[6] += courseScores.q7_average
+        #q_ratings[7] += courseScores.q8_average
+        #q_ratings[8] += courseScores.q9_average
+        #q_ratings[9] += courseScores.q10_average
 
-    for index in range(10):
+    for index in range(6):
         q_ratings[index] = round(q_ratings[index] / sections_size, 2)
 
-    return render_to_response('main/course.html', {'coursecode': coursecode,'coursenumber':coursenumber, 'questions': questions, 'ratings': q_ratings})
+    return render_to_response('main/course.html', {'subj': subj,'classcatnbr':classcatnbr, 'questions': questions, 'ratings': q_ratings})
 
 def handler404(request):
     response = render_to_response('404.html', {}, context_instance=RequestContext(request))

@@ -1,12 +1,12 @@
 from django.db import models
 
 class EvalQuestions(models.Model):
-    number = models.IntegerField(db_column='QUESTION_NUMBER')
+    number = models.IntegerField(db_column='QUESTION_NUMBER', primary_key=True)
     title = models.CharField(db_column='QUESTION_TITLE', max_length=100)
     text = models.CharField(db_column='QUESTION_TEXT', max_length=250)
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'CLASS_EVAL_QUESTIONS'
 
 class EvalResults(models.Model):
@@ -19,7 +19,7 @@ class EvalResults(models.Model):
     class_subj = models.CharField(db_column='CLASS_SUBJ',max_length=8)
     class_cat_nbr = models.CharField(db_column='CLASS_CAT_NBR', max_length=10)
     class_section = models.CharField(db_column='CLASS_SECTION', max_length=4)
-    class_number = models.IntegerField(db_column='CLASS_NUMBER')
+    class_number = models.IntegerField(db_column='CLASS_NUMBER', primary_key=True)
     q1_average = models.DecimalField(db_column='Q1_AVERAGE', max_digits=4, decimal_places=2)
     q2_average = models.DecimalField(db_column='Q2_AVERAGE', max_digits=4, decimal_places=2)
     q3_average = models.DecimalField(db_column='Q3_AVERAGE', max_digits=4, decimal_places=2)
@@ -33,5 +33,5 @@ class EvalResults(models.Model):
     campus = models.CharField(db_column='CAMPUS', max_length=5)
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'CLASS_EVAL_RESULTS'

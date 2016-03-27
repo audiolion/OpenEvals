@@ -1,12 +1,12 @@
 {% extends "main/base.html" %}
 
-{% block title %}Course {{coursenumber}} {{coursecode}}{% endblock %}
+{% block title %}Course {{coursecode}} {{classcatnbr}}{% endblock %}
 
 {% block banner %}
 {% load staticfiles %}
 <div class="container-fluid campus-carousel"style="background-image:url({% static "carousel.jpg"%})">
   <div class="col-xs-12 col-sm-6 col-sm-offset-3" style="top:25%; margin-top:15px;">
-    <div class="carousel-description text-center"><h1>Course {{coursecode}} {{coursenumber}}</h1></div>
+    <div class="carousel-description text-center"><h1>Course: {{coursecode}} {{classcatnbr}}</h1></div>
   </div>
 </div>
 
@@ -45,22 +45,6 @@
       <tr>
         <td>{{questions.5.title}}</td>
         <td>{{ratings.5}}</td>
-      </tr>
-      <tr>
-        <td>{{questions.6.title}}</td>
-        <td>{{ratings.6}}</td>
-      </tr>
-      <tr>
-        <td>{{questions.7.title}}</td>
-        <td>{{ratings.7}}</td>
-      </tr>
-      <tr>
-        <td>{{questions.8.title}}</td>
-        <td>{{ratings.8}}</td>
-      </tr>
-      <tr>
-        <td>{{questions.9.title}}</td>
-        <td>{{ratings.9}}</td>
       </tr>
     </table>
   </div>
