@@ -7,7 +7,7 @@ class EvalQuestions(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'CLASS_EVAL_QUESTIONS'
+        db_table = '"EVAL_OWNER"."CLASS_EVAL_QUESTIONS"'
 
 class EvalResults(models.Model):
     term_code = models.CharField(db_column='TERM_CODE', max_length=4)
@@ -34,4 +34,4 @@ class EvalResults(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'CLASS_EVAL_RESULTS'
+        db_table = '"EVAL_OWNER"."CLASS_EVAL_RESULTS"'
