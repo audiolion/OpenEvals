@@ -84,7 +84,7 @@ def professor(request, lastname, firstname):
     for course in courses:
         classes.append(create_course(course,firstname,lastname))
 
-    return render(request, 'main/professor.html', {'firstname': firstname,'lastname':lastname, 'questions': questions, 'ratings': q_ratings, 'courses': classes,'sim_profs': similar_profs})
+    return render(request, 'main/professor.html', {'firstname': firstname,'lastname':lastname, 'questions': questions, 'ratings': q_ratings,'courses': prof,'sim_profs': similar_profs})
 
 def create_course(course, fname, lname):
     c = Course(course.class_code,course.class_subj,course.class_cat_nbr)
@@ -122,7 +122,7 @@ def course(request, subj, classcatnbr):
     for index in range(6):
         q_ratings[index] = round(q_ratings[index] / sections_size, 2)
 
-    return render_to_response('main/course.html', {'subj': subj,'classcatnbr':classcatnbr, 'questions': questions, 'ratings': q_ratings})
+    return render_to_response('main/course.html', {'subj': subj,'classcatnbr':classcatnbr, 'questions': questions, 'ratings': q_ratings, 'sections': sections})
 
 def handler404(request):
     response = render_to_response('404.html', {}, context_instance=RequestContext(request))
