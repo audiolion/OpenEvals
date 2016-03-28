@@ -17,3 +17,15 @@ class Course():
             self.professors.add(prof)
         if(len(self.professors) == 3):
             self.ellipses = "..."
+
+    def addCampus(self, c):
+        if c == 'MAI':
+            self.campus.add("Rochester")
+        elif c == 'CDB':
+            self.campus.add("Dubrovnik")
+        elif c == 'CZA':
+            self.campus.add("Zagreb")
+        elif c == 'DUB':
+            self.campus.add("Dubai")
+        else:
+            self.campus.add(c)

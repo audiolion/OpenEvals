@@ -197,7 +197,7 @@ def coursesSearch(searchQuery, searchPOST):
             course.numSections = allSections.count()
             #Find campuses course is offered in
             for section in allSections:
-                course.campus.add(section.campus)
+                course.addCampus(section.campus)
             #Find professors who teach this course
             myProfessor = results.filter(class_subj=result.class_subj,
                                          class_number=result.class_number)
