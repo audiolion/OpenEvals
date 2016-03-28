@@ -6,13 +6,13 @@
 {% load staticfiles %}
 <div class="container-fluid campus-carousel"style="background-image:url({% static "carousel.jpg"%})">
   <div class="col-xs-12 col-sm-6 col-sm-offset-3" style="top:25%;">
-    <div class="carousel-description text-center"><h1>Professor {{firstname}} {{lastname}}</h1></div>
+    <div class="carousel-description text-center"><h1>{{firstname}} {{lastname}}</h1></div>
   </div>
 </div>
 {% endblock %}
 
 {% block content %}
-<h2 class="text-center">Questions and Responses</h2>
+<h2 class="text-center">Summary Results</h2>
 <div class="container">
   <div class="panel panel-default">
     <table class="table">
