@@ -1,7 +1,7 @@
 #This is to group information about courses
 from collections import Counter
 class Course():
-    def __init__(self, desc, subj, classcatnbr, title):
+    def __init__(self, desc, subj, classcatnbr, title = ""):
         self.title = title
         self.subj = subj.upper()
         self.classcatnbr = classcatnbr

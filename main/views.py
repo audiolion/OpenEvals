@@ -69,7 +69,7 @@ def professor(request, lastname, firstname):
 
     # Removes duplicate classes that the professor teaches
     seen = set()
-    courses = [x for x in prof if x.subj + x.class_cat_nbr not in seen and not seen.add( x.subj + x.class_cat_nbr)]
+    courses = [x for x in prof if x.class_subj + x.class_cat_nbr not in seen and not seen.add( x.class_subj + x.class_cat_nbr)]
 
     # Get all results for classes this professor teaches
     similar_profs_query = reduce(lambda q,course: q|Q(class_code=course.class_code), courses, Q())
@@ -88,11 +88,11 @@ def professor(request, lastname, firstname):
 
 def create_course(course, fname, lname):
     c = Course(course.class_code,course.class_subj,course.class_cat_nbr)
-    profs = EvalResults.objects.filter(class_subj=course.class_subj, class_number=course.class_number).exclude(instr_last_name=lname)
+    profs = EvalResults.objects.filter(class_subj=course.class_subj, class_cat_nbr=course.class_cat_nbr).exclude(instr_last_name=lname)
     for prof in profs:
         p = Professor(prof.instr_first_name, prof.instr_last_name)
         c.addProfessor(p)
-        c.numSections = EvalResults.objects.filter(class_subj=course.class_subj, class_number=course.class_number).count()
+        c.numSections = EvalResults.objects.filter(class_subj=course.class_subj, class_cat_nbr=course.class_cat_nbr).count()
 
     return c
 
