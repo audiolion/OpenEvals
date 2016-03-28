@@ -214,10 +214,10 @@ AUTOCOMPLETE VIEW
 def get_results(request):
     if request.is_ajax():
         currSearch = request.GET['term']
-        profs = EvalResults.objects.filter(instr_full_name__icontains=currSearch)[:3]
-        courses = EvalResults.objects.filter(class_code__istartswith=currSearch)[:3]
+        profs = EvalResults.objects.filter(instr_full_name__icontains=currSearch)[:10]
+        courses = EvalResults.objects.filter(class_code__istartswith=currSearch)[:10]
         if not courses.exists():
-            courses = EvalResults.objects.filter(class_subj__istartswith=currSearch)[:3]
+            courses = EvalResults.objects.filter(class_subj__istartswith=currSearch)[:10]
         foundC = []
         foundP = []
         #sets to prevent duplicate results
