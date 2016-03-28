@@ -69,7 +69,7 @@ def professor(request, lastname, firstname):
 
     # Removes duplicate classes that the professor teaches
     seen = set()
-    courses = [x for x in prof if x.class_code not in seen and not seen.add(x.class_code)]
+    courses = [x for x in prof if x.subj + x.class_cat_nbr not in seen and not seen.add( x.subj + x.class_cat_nbr)]
 
     # Get all results for classes this professor teaches
     similar_profs_query = reduce(lambda q,course: q|Q(class_code=course.class_code), courses, Q())
@@ -189,22 +189,23 @@ def coursesSearch(searchQuery, searchPOST):
     foundCourses = list()
     for result in results:
         seenP = set()
-        if result.class_code not in seenC:
-            seenC.add(result.class_code)
+        if result.class_subj + result.class_cat_nbr not in seenC:
+            seenC.add(result.class_subj + result.class_cat_nbr)
             course = Course(result.class_code, result.class_subj, result.class_cat_nbr, result.class_desc)
             #calculate how many sections there are
-            allSections = results.filter(class_subj=result.class_subj, class_number=result.class_number)
+            allSections = results.filter(class_subj=result.class_subj, class_cat_nbr=result.class_cat_nbr)
             course.numSections = allSections.count()
             #Find campuses course is offered in
             for section in allSections:
                 course.addCampus(section.campus)
             #Find professors who teach this course
             myProfessor = results.filter(class_subj=result.class_subj,
-                                         class_number=result.class_number)
+                                         class_cat_nbr=result.class_cat_nbr)
             for prof in myProfessor:
                 if prof.instr_full_name not in seenP:
                     seenP.add(result.instr_full_name)
                     course.addProfessor(Professor(prof.instr_first_name, prof.instr_last_name))
+            foundCourses.append(course)
     return foundCourses
 
 '''
@@ -226,17 +227,17 @@ def get_results(request):
             if result.instr_full_name not in seenP:
                 seenP.add(result.instr_full_name)
                 result_json = {}
-                result_json['id'] = result.id
+                result_json['id'] = result.instr_full_name
                 result_json['label'] = result.instr_full_name
                 result_json['value'] = result.instr_full_name
                 foundP.append(result_json)
         for result in courses:
-            if result.class_code not in seenC:
-                seenC.add(result.class_code)
+            if result.class_subj + result.class_cat_nbr not in seenC:
+                seenC.add(result.class_subj + result.class_cat_nbr)
                 result_json = {}
-                result_json['id'] = result.id
-                result_json['label'] = result.class_code
-                result_json['value'] = result.class_code
+                result_json['id'] = result.class_subj + result.class_cat_nbr
+                result_json['label'] = result.class_subj + " - " + result.class_cat_nbr
+                result_json['value'] = result.class_subj + " " + result.class_cat_nbr
                 foundC.append(result_json)
 
         found = foundC + foundP
