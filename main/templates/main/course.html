@@ -24,29 +24,134 @@
       </tr>
       <tr>
         <td>{{questions.0.text}}</td>
+        <td>
+          <div class="progress">
+            <div class="progress-bar {% if ratings.0 > 4 %} progress-bar-success {% endif %} {% if ratings.0 < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio ratings.0 1 20 %}%;"></div>
+          </div>
+        </td>
         <td>{{ratings.0}}</td>
       </tr>
       <tr>
         <td>{{questions.1.text}}</td>
+        <td>
+          <div class="progress">
+            <div class="progress-bar {% if ratings.0 > 4 %} progress-bar-success {% endif %} {% if ratings.0 < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio ratings.1 1 20 %}%;"></div>
+          </div>
+        </td>
         <td>{{ratings.1}}</td>
       </tr>
       <tr>
         <td>{{questions.2.text}}</td>
+        <td>
+          <div class="progress">
+            <div class="progress-bar {% if ratings.2 > 4 %} progress-bar-success {% endif %} {% if ratings.2 < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio ratings.2 1 20 %}%;"></div>
+          </div>
+        </td>
         <td>{{ratings.2}}</td>
       </tr>
       <tr>
         <td>{{questions.3.text}}</td>
+        <td>
+          <div class="progress">
+            <div class="progress-bar {% if ratings.3 > 4 %} progress-bar-success {% endif %} {% if ratings.3 < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio ratings.3 1 20 %}%;"></div>
+          </div>
+        </td>
         <td>{{ratings.3}}</td>
       </tr>
       <tr>
         <td>{{questions.4.text}}</td>
+        <td>
+          <div class="progress">
+            <div class="progress-bar {% if ratings.4 > 4 %} progress-bar-success {% endif %} {% if ratings.4 < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio ratings.4 1 20 %}%;"></div>
+          </div>
+        </td>
         <td>{{ratings.4}}</td>
       </tr>
       <tr>
         <td>{{questions.5.text}}</td>
+        <td>
+          <div class="progress">
+            <div class="progress-bar {% if ratings.5 > 4 %} progress-bar-success {% endif %} {% if ratings.5 < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio ratings.5 1 20 %}%;"></div>
+          </div>
+        </td>
         <td>{{ratings.5}}</td>
       </tr>
     </table>
   </div>
+</div>
+<h2 class="text-center">Sections</h2>
+<div class="container">
+  <div class="row">
+    {% for course in sections %}
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading"><a href= "{% url 'main:professor_full' course.instr_last_name course.instr_first_name %}" >
+          <h3>{{ course.instr_first_name}} {{ course.instr_last_name }} - {{course.class_section}}</h3></a></div>
+          <table class="table table-striped">
+            <thead>
+              <th>Question</th>
+              <th>Rating</th>
+              <th>/5</th>
+            </thead>
+            <tr>
+              <td>Helpful Instructor?</td>
+              <td>
+                <div class="progress">
+                  <div class="progress-bar {% if course.q1_average > 4 %} progress-bar-success {% endif %} {% if course.q1_average < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio course.q1_average 1 20 %}%;"></div>
+                </div>
+              </td>
+              <td>{{ course.q1_average }}</td>
+            </tr>
+            <tr>
+              <td>Responsive Instructor?</td>
+              <td>
+                <div class="progress">
+                  <div class="progress-bar {% if course.q2_average > 4 %} progress-bar-success {% endif %} {% if course.q2_average < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio course.q2_average 1 20 %}%;"></div>
+                </div>
+              </td>
+              <td>{{ course.q2_average }}</td>
+            </tr>
+            <tr>
+              <td>Organized Course?</td>
+              <td>
+                <div class="progress">
+                  <div class="progress-bar {% if course.q3_average > 4 %} progress-bar-success {% endif %} {% if course.q3_average < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio course.q3_average 1 20 %}%;"></div>
+                </div>
+              </td>
+              <td>{{ course.q3_average }}</td>
+            </tr>
+            <tr>
+              <td>Advanced My Understanding?</td>
+              <td>
+                <div class="progress">
+                  <div class="progress-bar {% if course.q4_average > 4 %} progress-bar-success {% endif %} {% if course.q4_average < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio course.q4_average 1 20 %}%;"></div>
+                </div>
+              </td>
+              <td>{{ course.q4_average }}</td>
+            </tr>
+            <tr>
+              <td>Workload?</td>
+              <td>
+                <div class="progress">
+                  <div class="progress-bar {% if course.q5_average > 4 %} progress-bar-success {% endif %} {% if course.q5_average < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio course.q5_average 1 20 %}%;"></div>
+                </div>
+              </td>
+              <td>{{ course.q5_average }}</td>
+            </tr>
+            <tr>
+              <td>Would Recommend?</td>
+              <td>
+                <div class="progress">
+                  <div class="progress-bar {% if course.q6_average > 4 %} progress-bar-success {% endif %} {% if course.q6_average < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio course.q6_average 1 20 %}%;"></div>
+                </div>
+              </td>
+              <td>{{ course.q6_average }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="alert alert-danger">Missing a course? Only courses that receive enough evaluations are reflected here. Always fill out your SmartEvals surveys!</div>
 </div>
 {% endblock %}
