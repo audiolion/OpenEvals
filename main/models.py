@@ -4,6 +4,7 @@ class EvalQuestions(models.Model):
     number = models.IntegerField(db_column='QUESTION_NUMBER', primary_key=True)
     title = models.CharField(db_column='QUESTION_TITLE', max_length=100)
     text = models.CharField(db_column='QUESTION_TEXT', max_length=250)
+    _database = "oracle"
 
     class Meta:
         managed = False
@@ -31,7 +32,31 @@ class EvalResults(models.Model):
     q9_average = models.DecimalField(db_column='Q9_AVERAGE', max_digits=4, decimal_places=2)
     q10_average = models.DecimalField(db_column='Q10_AVERAGE', max_digits=4, decimal_places=2)
     campus = models.CharField(db_column='CAMPUS', max_length=5)
+    _database = "oracle"
 
     class Meta:
         managed = False
         db_table = '"EVAL_OWNER"."CLASS_EVAL_RESULTS"'
+
+class CustomRouter(object):
+    def db_for_read(self,model, **hints):
+        database = getattr(model, "_database", None)
+        if database:
+            return database
+        else:
+            return "default"
+
+    def db_for_write(self,model, **hints):
+        database = getattr(model, "_database", None)
+        if database:
+            return database
+        else:
+            return "default"
+
+    def allow_relations(self, obj1, obj2, **hints):
+        return None
+
+    def allow_migrate(self, db, model):
+        if getattr(model, "_database", None):
+            return False
+        return True

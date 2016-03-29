@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.shortcuts import get_list_or_404, render
 from django.shortcuts import render_to_response
 from django.template  import RequestContext
@@ -10,6 +11,8 @@ from .models import *
 from .Professor import *
 from .Course import *
 from .forms import SearchForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 import json
 
 def index(request):
@@ -18,6 +21,25 @@ def index(request):
 def about(request):
     return render(request, 'main/about.html')
 
+def login_view(request):
+    if len(request.POST) > 0:
+        usern = request.POST.get('Username')
+        passwd = request.POST.get('Password')
+        user = authenticate(username=usern,password=passwd)
+        if user is not None:
+            login(request, user)
+            if (request.GET.get['next']):
+                return redirect(request.GET.get('next'))
+            return redirect('/search/')
+        else:
+            return render(request, 'main/login.html')
+    return render(request, 'main/login.html')
+    
+def logout_view(request):
+    logout(request)
+    return redirect('/')
+
+@login_required
 def search(request, searchQ):
     if request.method == 'GET' and len(request.GET) > 0:
         form = SearchForm(request.GET)
@@ -41,6 +63,7 @@ def search(request, searchQ):
         else:
             return render(request, 'main/search.html', {'search_form' : form })
 
+@login_required
 def professor(request, lastname, firstname):
     lastname = lastname.title()
     firstname = firstname.title()
@@ -96,6 +119,7 @@ def create_course(course, fname, lname):
 
     return c
 
+@login_required
 def course(request, subj, classcatnbr):
     #coursecode = coursecode.title()
     #coursenumber = coursenumber.title()
