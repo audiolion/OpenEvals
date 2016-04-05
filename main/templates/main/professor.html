@@ -6,13 +6,13 @@
 {% load staticfiles %}
 <div class="container-fluid campus-carousel"style="background-image:url({% static "carousel.jpg"%})">
   <div class="col-xs-12 col-sm-6 col-sm-offset-3" style="top:25%;">
-    <div class="carousel-description text-center"><h1>Professor {{firstname}} {{lastname}}</h1></div>
+    <div class="carousel-description text-center"><h1>{{firstname}} {{lastname}}</h1></div>
   </div>
 </div>
 {% endblock %}
 
 {% block content %}
-<h2 class="text-center">Questions and Responses</h2>
+<h2 class="text-center">Summary Results</h2>
 <div class="container">
   <div class="panel panel-default">
     <table class="table">
@@ -21,93 +21,63 @@
         <th>Rating</th>
       </tr>
       <tr>
-        <td>{{questions.0.title}}</td>
+        <td>{{questions.0.text}}</td>
+        <td>
+          <div class="progress">
+            <div class="progress-bar {% if ratings.0 > 4 %} progress-bar-success {% endif %} {% if ratings.0 < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio ratings.0 1 20 %}%;"></div>
+          </div>
+        </td>
         <td>{{ratings.0}}</td>
       </tr>
       <tr>
-        <td>{{questions.1.title}}</td>
+        <td>{{questions.1.text}}</td>
+        <td>
+          <div class="progress">
+            <div class="progress-bar {% if ratings.0 > 4 %} progress-bar-success {% endif %} {% if ratings.0 < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio ratings.1 1 20 %}%;"></div>
+          </div>
+        </td>
         <td>{{ratings.1}}</td>
-      </tr>
-      <tr>
-        <td>{{questions.2.title}}</td>
-        <td>{{ratings.2}}</td>
-      </tr>
-      <tr>
-        <td>{{questions.3.title}}</td>
-        <td>{{ratings.3}}</td>
-      </tr>
-      <tr>
-        <td>{{questions.4.title}}</td>
-        <td>{{ratings.4}}</td>
-      </tr>
-      <tr>
-        <td>{{questions.5.title}}</td>
-        <td>{{ratings.5}}</td>
-      </tr>
-      <tr>
-        <td>{{questions.6.title}}</td>
-        <td>{{ratings.6}}</td>
-      </tr>
-      <tr>
-        <td>{{questions.7.title}}</td>
-        <td>{{ratings.7}}</td>
-      </tr>
-      <tr>
-        <td>{{questions.8.title}}</td>
-        <td>{{ratings.8}}</td>
-      </tr>
-      <tr>
-        <td>{{questions.9.title}}</td>
-        <td>{{ratings.9}}</td>
       </tr>
     </table>
   </div>
   </div>
-<h2 class="text-center">Courses</h2>
+<h2 class="text-center">Sections</h2>
 <div class="container">
   <div class="row">
     {% for course in courses %}
-    <a href= "{% url 'main:course_full' course.code course.number %}" >
-      <div class="square col-md-4">
-        <div class="square-content" style="height:auto;">
-          <div class="row">
-            <div class="col-xs-10"><h2 style="color: black;">{{ course.code}}-{{ course.number }}</h2></div>
-            <div class="col-xs-2">
-              <h2 style="color: black; text-align: right">
-                {{ course.numSections }}
-              </h2>
-            </div>
-          </div>
-          <h4 class="primary_link">
-            {% for prof in course.professors %}
-              <a href="{% url 'main:professor_full' prof.lname prof.fname %}" class="primary_link">
-                {{prof.fname}} {{prof.lname}}&nbsp;
-              </a> 
-            {% endfor %}
-            {{ course.ellipses }}
-          </h4>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading"><a href= "{% url 'main:course_full' course.class_subj course.class_cat_nbr %}" ><h3>{{ course.class_subj}}-{{ course.class_cat_nbr }}-{{course.class_section}}</h3></a></div>
+          <table class="table table-striped">
+            <thead>
+              <th>Question</th>
+              <th>Rating</th>
+              <th>/5</th>
+            </thead>
+            <tr>
+              <td>Helpful?</td>
+              <td>
+                <div class="progress">
+                  <div class="progress-bar {% if course.q1_average > 4 %} progress-bar-success {% endif %} {% if course.q1_average < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio course.q1_average 1 20 %}%;"></div>
+                </div>
+              </td>
+              <td>{{ course.q1_average }} / 5</td>
+            </tr>
+            <tr>
+              <td>Prompt?</td>
+              <td>
+                <div class="progress">
+                  <div class="progress-bar {% if course.q2_average > 4 %} progress-bar-success {% endif %} {% if course.q2_average < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio course.q2_average 1 20 %}%;"></div>
+                </div>
+              </td>
+              <td>{{ course.q2_average }} / 5</td>
+            </tr>
+          </table>
         </div>
       </div>
-    </a>
     {% endfor %}
   </div>
-</div>
-
-<h2 class="text-center">Professors</h2>
-<div class="container">
-  <div class="row">
-    {% for prof in sim_profs %}
-    <a href= "{% url 'main:professor_full' prof.instr_last_name prof.instr_first_name %}" >
-      <div class="square col-md-4">
-        <div class="square-content" style="height:auto;">
-          <div class="row">
-            <div class="col-xs-10"><h2 style="color: black;">{{ prof.instr_full_name }}</h2></div>
-          </div>
-        </div>
-      </div>
-    </a>
-    {% endfor %}
-  </div>
+  <div class="alert alert-danger">Missing a course? Only courses that receive enough evaluations are reflected here. Always fill out your SmartEvals surveys!</div>
 </div>
 
 {% endblock %}
