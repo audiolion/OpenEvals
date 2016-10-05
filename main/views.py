@@ -282,6 +282,11 @@ def get_results(request):
                 result_json['id'] = result.instr_full_name
                 result_json['label'] = result.instr_full_name
                 result_json['value'] = result.instr_full_name
+                result_json['url'] = "/professor/" + result.instr_last_name + "/" + result.instr_first_name
+
+                #"instr_last_name": "White",
+                #"instr_first_name": "Phillip",
+
                 foundP.append(result_json)
         for result in courses:
             if result.class_subj + result.class_cat_nbr not in seenC:
@@ -289,7 +294,8 @@ def get_results(request):
                 result_json = {}
                 result_json['id'] = result.class_subj + result.class_cat_nbr
                 result_json['label'] = result.class_subj + " - " + result.class_cat_nbr + " " + result.class_desc
-                result_json['value'] = result.class_subj + result.class_cat_nbr
+                result_json['value'] = result.class_subj + " " + result.class_cat_nbr
+                result_json['url'] = "/course/" + result.class_subj + "/" + result.class_cat_nbr
                 foundC.append(result_json)
 
         found = foundC + foundP
