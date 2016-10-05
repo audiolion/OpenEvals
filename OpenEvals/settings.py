@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 from OpenEvals import secrets
 import os
+import ldap
+from django_auth_ldap.config import LDAPSearch, GroupOfNamesType
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +27,8 @@ SECRET_KEY = secrets.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['openevals.rit.edu','evals.rit.edu']
 
 
 # Application definition
@@ -56,11 +59,7 @@ STATICFILES_FINDERS = (
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = '/static/'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
-]
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 STATIC_PRECOMPILER_COMPILERS = (
     ('static_precompiler.compilers.LESS', {
@@ -105,47 +104,53 @@ WSGI_APPLICATION = 'OpenEvals.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
+DATABASE_ROUTERS = ['main.models.CustomRouter']
+
 DATABASES = {
     'default': {
         #'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        #'NAME': secrets.NAME,
+        #'NAME': '/var/www/evals/user',
+        'NAME': 'user.db',
         #'USER': secrets.USER,
         #'PASSWORD': secrets.PASSWORD,
         #'HOST': secrets.HOST,
         #'PORT': secrets.PORT,
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'dev'
     },
-    #'oracle' :{
-        #'ENGINE': 'django.db.backends.oracle',
-        #'NAME': secrets.ORACLE_NAME,
-        #'USER': secrets.ORACLE_USER,
-        #'PASSWORD': secrets.ORACLE_PASSWORD,
-        #'HOST': secrets.ORACLE_HOST,
-        #'PORT': secrets.ORACLE_PORT,
-    #}
+#    'oracle': {
+#        'ENGINE': 'django.db.backends.oracle',
+#        'NAME': secrets.ORACLE_NAME,
+#        'USER': secrets.ORACLE_USER,
+#        'PASSWORD': secrets.ORACLE_PASSWORD,
+#        'HOST': secrets.ORACLE_HOST,
+#        'PORT': secrets.ORACLE_PORT,
+#    }
 
 }
 
+# LDAP Config
+AUTH_LDAP_SERVER_URI = "ldaps://ldap.rit.edu"
 
-# Password validation
-# https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
+AUTH_LDAP_BIND_DN = "uid=" + secrets.LDAP_USER + ",ou=People,dc=rit,dc=edu"
+AUTH_LDAP_BIND_PASSWORD = secrets.LDAP_PASSWORD
+AUTH_LDAP_USER_SEARCH = LDAPSearch("ou=People,dc=rit,dc=edu", ldap.SCOPE_SUBTREE, "(uid=%(user)s)")
+AUTH_LDAP_GROUP_SEARCH = LDAPSearch("ou=Groups,dc=rit,dc=edu", ldap.SCOPE_SUBTREE, "(objectClass=groupOfNames)")
+AUTH_LDAP_GROUP_TYPE = GroupOfNamesType()
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+#Require student, prevent others
+AUTH_LDAP_REQUIRE_GROUP = "cn=student,ou=Groups,dc=rit,dc=edu"
+AUTH_LDAP_DENY_GROUP = "cn=staff,ou=Groups,dc=rit,dc=edu"
+AUTH_LDAP_DENY_GROUP = "cn=faculty,ou=Groups,dc=rit,dc=edu"
+AUTH_LDAP_DENY_GROUP = "cn=studemp,ou=Groups,dc=rit,dc=edu"
 
+#AUTH_LDAP_USER_ATTR_MAP = {
+#    "first_name": "givenName",
+#    "last_name": "sn",
+#}
+
+AUTHENTICATION_BACKENDS = ('django_auth_ldap.backend.LDAPBackend', 'django.contrib.auth.backends.ModelBackend')
+
+LOGIN_REDIRECT_URL = '/search/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
@@ -161,7 +166,7 @@ USE_L10N = True
 USE_TZ = True
 
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_URL = '/static/'
