@@ -31,5 +31,3 @@ A travisCI build will be triggered.
 
 Once a pull request has been made <b> please wait for two reviews before merging </b> as well
 as a successful travis build.
-
-##LOLOLOLOL

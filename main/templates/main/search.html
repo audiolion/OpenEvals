@@ -9,27 +9,28 @@
     <div class="col-xs-12 col-sm-6 col-sm-offset-3">
       <div class="text-center carousel-description"><h3>Search</h3></div>
         <form class="main" action="{% url 'main:search' "" %}" method="get">
-            {% csrf_token %}
             {{ search_form }}
         </form>
     </div>
   </div>
   <div class="container">
+
+  {% if not courses %}
+
+      <div class="col-md-12 text-center">
+This is what the landing page is for a blank search/usage search page
+
+      </div>
+  {% endif %}
     <div class="col-md-6">
       <h1 class="text-center">Courses</h1>
       <div class="row">
         {% for course in courses  %}
-        <a href= "{% url 'main:course_full' course.code course.number %}" >
+        <a href= "{% url 'main:course_full' course.subj course.classcatnbr %}" >
           <div class="square col-xs-12">
             <div class="square-content" style="height:auto;">
-              <div class="row">
-                <div class="col-xs-10"><h2 style="color: black;">{{ course.code}}-{{ course.number }} {{ course.title }}</h2></div>
-                <div class="col-xs-2">
-                  <h2 style="color: black; text-align: right">
-                    {{ course.numSections }}
-                  </h2>
-                </div>
-              </div>
+            <h4>{{ course.title }}</h4>
+              <h3 style="color:black;">{{course.subj}} - {{course.classcatnbr}}</h3>
               <h4 class="primary_link">
                 {% for prof in course.professors %}
                 <a href="{% url 'main:professor_full' prof.lname prof.fname %}" class="primary_link" >
@@ -39,16 +40,18 @@
                 {{ course.ellipses }}
               </h4>
               <h4 class="secondary_link">
-                Campuses:
                 {% for campus in course.campus %}
-                {{ campus }}&nbsp;
+                {{ campus }},
                 {% endfor %}
+                {{ course.numSections }} Section{% if course.numSections > 1 %}s{% endif %}
               </h4>
             </div>
           </div>
         </a>
         {% endfor %}
       </div>
+	  <div class="alert alert-danger">Missing a course? Only courses that receive enough evaluations are reflected here. Always fill out your SmartEvals surveys!</div>
+
     </div>
     <div class="col-md-6">
       <h1 class="text-center">Professors</h1>
@@ -69,8 +72,8 @@
               </div>
               <h4>
                 {% for course in prof.tileCourses %}
-                <a href="{% url 'main:course_full' course.code course.number %}"  class="primary_link">
-                  {{ course.code }}-{{ course.number }}&nbsp;
+                <a href="{% url 'main:course_full' course.subj course.classcatnbr %}"  class="primary_link">
+                  {{ course.subj }}-{{ course.classcatnbr }}&nbsp;
                 </a>
                 {% endfor %}
                 {{ prof.ellipses }}
@@ -80,7 +83,10 @@
         </a>
         {% endfor %}
       </div>
+       <div class="alert alert-danger">Missing a professor? Only professors who had courses that received enough evaluations, and that have been teaching for at least two semesters, are reflected here. Always fill out your SmartEvals surveys!</div>
+
     </div>
+
   </div>
 {% block footer %}
     {{ search_form.media }}
