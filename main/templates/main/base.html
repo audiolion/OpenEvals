@@ -36,7 +36,7 @@
             <a href="{% url 'main:about' %}">About</a>
           </li>
           <li class="">
-            <a href="{% url 'main:search' '' %}">Search</a>
+            <a href="{% url 'main:browse' %}">Browse</a>
           </li>
 	  <li>
 	    <a href="http://goo.gl/forms/WiBZ03nZSZ">Beta Feedback</a>
@@ -56,7 +56,24 @@
   </nav>
   {% block banner %}
 
+
   {% endblock %}
+
+      <div class="container-fluid carousel" style="background-image:url({% static "carousel.jpg" %});background-attachment:fixed;">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3" style="top:25%;
+         margin-top:15px;">
+        <h2 class="carousel-title text-center">OPENEVALS BETA</h2>
+        <div class="carousel-description text-center">
+          <h3>Course and Professor Evaluations.<br /> For students, by students.</h3>
+{% block carousel %}
+
+            {% endblock %}</div>
+        </div>
+
+
+    </div>
+    </div>
+
   {% block content %}
 
   {% endblock  %}

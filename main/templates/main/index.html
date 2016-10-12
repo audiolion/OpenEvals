@@ -4,20 +4,23 @@
 
 {% block banner %}
 {% load staticfiles %}
-<div class="container-fluid carousel" style="background-image:url({% static "carousel.jpg" %});background-attachment:fixed;">
-    <div class="col-xs-12 col-sm-6 col-sm-offset-3" style="top:25%;
-         margin-top:15px;">
-        <h2 class="carousel-title text-center">OPENEVALS BETA</h2>
-        <div class="carousel-description text-center">
-          <h3>Course and Professor Evaluations.<br /> For students, by students.</h3>
-          <a href="/search" class="btn btn-lg btn-outline-primary btn-main-search">
+
+{% endblock banner %}
+{{% block carousel %}
+
+          <button class="btn btn-lg btn-outline-primary btn-main-search search-margin">
                 Search
                 <span class="glyphicon glyphicon-search carousel-search-icon"></span>
-              </a>
-	</div>
-    </div>
-</div>
-{% endblock banner %}
+              </button>
+
+    <form class="search-margin search-bar-hide" action="{% url 'main:search' "" %}" method="get">
+            {{ search_form }}
+        </form>
+
+    <button class="btn btn-lg btn-outline-primary btn-main-search-x search-margin">
+    Cancel <span class="glyphicon glyphicon-remove carousel-search-icon" aria-hidden="true"></span>
+    </button>
+{% endblock %}
 
 {% block content %}
 <div class="container">

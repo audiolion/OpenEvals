@@ -17,7 +17,8 @@ import json
 
 
 def index(request):
-    return render(request, 'main/index.html')
+    form = SearchForm()
+    return render(request, 'main/index.html', {'search_form': form})
 
 
 def about(request):
@@ -254,6 +255,19 @@ def coursesSearch(searchQuery, searchPOST):
                     course.addProfessor(Professor(prof.instr_first_name, prof.instr_last_name))
             foundCourses.append(course)
     return foundCourses
+
+'''
+BROWSE
+'''
+
+def browse(request):
+
+    #Gets the list of all possible class subjects
+    subjects = EvalResults.objects.values_list('class_subj', flat=True).distinct()
+
+
+
+    return render(request, 'main/browse.html', {'subjects': subjects})
 
 
 '''

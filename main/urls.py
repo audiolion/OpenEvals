@@ -6,6 +6,7 @@ app_name='main'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'about', views.about, name='about'),
+    url(r'browse', views.browse, name='browse'),
     url(r'login/$', 'django.contrib.auth.views.login', {'template_name': 'main/login.html'}, name='login'),
     url(r'logout/$', 'django.contrib.auth.views.logout', {'template_name': 'main/logout.html'},  name='logout'),
     url(r'search/(\w*)', views.search, name='search'),

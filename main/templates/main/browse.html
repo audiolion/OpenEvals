@@ -3,7 +3,7 @@
 {% block title %}About OpenEvals{% endblock %}
 
 {% block carousel %}
-    <div class="carousel-description text-center"><h3>About</h3></div>
+    <div class="carousel-description text-center"><h2>Browse</h2></div>
 {% endblock %}
 
 {% block content %}
@@ -11,7 +11,15 @@
   <hr />
   <div class="panel panel-default">
     <div class="panel-body">
-      <p>OpenEvals was created to allow RIT students to view the results of the SmartEvals surveys conducted each fall and spring. </p>
+
+        {% for subject in subjects %}
+            <div class="col-md-3">
+            <button class="btn-lg btn-primary btn-browse">{{ subject }}</button>
+            </div>
+        {% endfor %}
+
+
+
     </div>
   </div>
 </div>
