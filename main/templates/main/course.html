@@ -41,6 +41,7 @@
 <div class="container">
   <div class="panel panel-default">
 
+
     <table class="table">
       <tr>
         <th>Question</th>
@@ -49,56 +50,74 @@
       <tr>
         <td>{{questions.0.text}}</td>
         <td>
-          <div class="progress">
-            <div class="progress-bar {% if ratings.0 > 4 %} progress-bar-success {% endif %} {% if ratings.0 < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio ratings.0 1 20 %}%;"></div>
-          </div>
+            <div class="c100 {{ pie.0 }} small">
+                <span>{{ ratings.0 }}</span>
+                <div class="slice">
+                    <div class="bar"></div>
+                    <div class="fill"></div>
+                </div>
+            </div>
         </td>
-        <td>{{ratings.0}}</td>
       </tr>
       <tr>
         <td>{{questions.1.text}}</td>
         <td>
-          <div class="progress">
-            <div class="progress-bar {% if ratings.0 > 4 %} progress-bar-success {% endif %} {% if ratings.0 < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio ratings.1 1 20 %}%;"></div>
-          </div>
+            <div class="c100 {{ pie.1 }} small">
+                <span>{{ ratings.1 }}</span>
+                <div class="slice">
+                    <div class="bar"></div>
+                    <div class="fill"></div>
+                </div>
+            </div>
         </td>
-        <td>{{ratings.1}}</td>
       </tr>
       <tr>
         <td>{{questions.2.text}}</td>
         <td>
-          <div class="progress">
-            <div class="progress-bar {% if ratings.2 > 4 %} progress-bar-success {% endif %} {% if ratings.2 < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio ratings.2 1 20 %}%;"></div>
-          </div>
+            <div class="c100 {{ pie.2 }} small">
+                <span>{{ ratings.2 }}</span>
+                <div class="slice">
+                    <div class="bar"></div>
+                    <div class="fill"></div>
+                </div>
+            </div>
         </td>
-        <td>{{ratings.2}}</td>
       </tr>
       <tr>
         <td>{{questions.3.text}}</td>
         <td>
-          <div class="progress">
-            <div class="progress-bar {% if ratings.3 > 4 %} progress-bar-success {% endif %} {% if ratings.3 < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio ratings.3 1 20 %}%;"></div>
-          </div>
+            <div class="c100 {{ pie.3 }} small">
+                <span>{{ ratings.3 }}</span>
+                <div class="slice">
+                    <div class="bar"></div>
+                    <div class="fill"></div>
+                </div>
+            </div>
         </td>
-        <td>{{ratings.3}}</td>
       </tr>
       <tr>
         <td>{{questions.4.text}}</td>
         <td>
-          <div class="progress">
-            <div class="progress-bar {% if ratings.4 > 4 %} progress-bar-success {% endif %} {% if ratings.4 < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio ratings.4 1 20 %}%;"></div>
-          </div>
+            <div class="c100 {{ pie.4 }} small">
+                <span>{{ ratings.4 }}</span>
+                <div class="slice">
+                    <div class="bar"></div>
+                    <div class="fill"></div>
+                </div>
+            </div>
         </td>
-        <td>{{ratings.4}}</td>
       </tr>
       <tr>
         <td>{{questions.5.text}}</td>
         <td>
-          <div class="progress">
-            <div class="progress-bar {% if ratings.5 > 4 %} progress-bar-success {% endif %} {% if ratings.5 < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio ratings.5 1 20 %}%;"></div>
-          </div>
+            <div class="c100 {{ pie.5 }} small">
+                <span>{{ ratings.5 }}</span>
+                <div class="slice">
+                    <div class="bar"></div>
+                    <div class="fill"></div>
+                </div>
+            </div>
         </td>
-        <td>{{ratings.5}}</td>
       </tr>
     </table>
   </div>
