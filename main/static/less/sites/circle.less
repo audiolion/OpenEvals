@@ -59,8 +59,9 @@
     -moz-border-radius: 50% !important;
     border-radius: 50%;
 
-    float: left;
-    margin: 0 0.1em 0.1em 0;
+    //float: left;
+    //margin: 0 0.1em 0.1em 0;
+    margin: 0 auto;
     background-color: @secondary-color;
 
     // center circle to its parent
@@ -71,7 +72,14 @@
 
     // bigger size
     &.big{
-        font-size: 240px;
+        font-size: 100px;
+    }
+
+    @media only screen and (min-width: 500px) {
+        &.big { font-size: 160px; }
+    }
+    @media only screen and (min-width: 750px) {
+        &.big { font-size: 200px; }
     }
 
     // smaller size

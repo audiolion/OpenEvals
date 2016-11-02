@@ -83,6 +83,7 @@ def professor(request, lastname, firstname):
     questions = EvalQuestions.objects.all()
 
     q_ratings = [0] * 10
+    q_pies = [0] * 10
 
     # Average question ratings
     for professor in prof:
@@ -98,6 +99,13 @@ def professor(request, lastname, firstname):
         # q_ratings[9] += professor.q10_average
     for index in range(6):
         q_ratings[index] = round(q_ratings[index] / prof_size, 2)
+
+    oldrange = 5-1
+    newrange = 10-1
+
+    for index in range(6):
+        q_ratings[index] = round((q_ratings[index] - 1)*newrange/oldrange + 1, 2)
+        q_pies[index] = "p" + str(round(q_ratings[index]*10,0))
 
     # Removes duplicate classes that the professor teaches
     seen = set()
@@ -119,7 +127,7 @@ def professor(request, lastname, firstname):
 
     return render(request, 'main/professor.html',
                   {'search_form': form, 'firstname': firstname, 'lastname': lastname, 'questions': questions,
-                   'ratings': q_ratings, 'courses': prof, 'sim_profs': similar_profs})
+                   'ratings': q_ratings, 'pie':q_pies, 'courses': prof, 'sim_profs': similar_profs})
 
 
 def create_course(course, fname, lname):
@@ -139,7 +147,7 @@ def create_course(course, fname, lname):
 def course(request, subj, classcatnbr):
     form = SearchForm()
     # coursecode = coursecode.title()
-    # coursenumber = coursenumber.title()
+    # coursenumber = coursenumber.title()]
     sections = get_list_or_404(EvalResults, class_subj=subj, class_cat_nbr=classcatnbr)
 
     sections_size = len(sections)
