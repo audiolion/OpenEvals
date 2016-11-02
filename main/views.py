@@ -155,7 +155,6 @@ def course(request, subj, classcatnbr):
     questions = EvalQuestions.objects.all()
 
     q_ratings = [0] * 10
-    q_pies = [0] * 10
 
     for courseScores in sections:
         q_ratings[0] += courseScores.q1_average
@@ -172,16 +171,14 @@ def course(request, subj, classcatnbr):
     for index in range(6):
         q_ratings[index] = round(q_ratings[index] / sections_size, 2)
 
+    ## Changed from 5 scale to 10 scale
     oldrange = 5-1
-    newrange = 10-1
+    newrange = 100-1
 
-    for index in range(6):
-        q_ratings[index] = round((q_ratings[index] - 1)*newrange/oldrange + 1, 2)
-        q_pies[index] = "p" + str(round(q_ratings[index]*10,0))
 
     return render_to_response('main/course.html',
                               {'search_form': form, 'subj': subj, 'classcatnbr': classcatnbr, 'questions': questions,
-                               'ratings': q_ratings, 'pie': q_pies, 'sections': sections})
+                               'ratings': q_ratings, 'sections': sections})
 
 
 def handler404(request):

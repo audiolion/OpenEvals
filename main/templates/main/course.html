@@ -4,6 +4,7 @@
 
 {% block banner %}
 {% load staticfiles %}
+{% load app_filters %}
 
     <!--
 <div class="container-fluid campus-carousel"style="background-image:url({% static "carousel.jpg"%})">
@@ -42,8 +43,8 @@
   <div class="panel panel-default">
 
       <div class="col-xs-6 col-sm-4 text-center">
-          <div class="c100 big {{ pie.0 }}" style="clear: both; margin-top: 20px;">
-                <span>{{ ratings.0 }}</span>
+          <div class="c100 big p{{ ratings.0|convert_100 }} " style="clear: both; margin-top: 20px;">
+                <span>{{ ratings.0|convert_10 }}</span>
                 <div class="slice">
                     <div class="bar"></div>
                     <div class="fill"></div>
@@ -54,8 +55,8 @@
           </div>
       </div>
       <div class="col-xs-6 col-sm-4 text-center">
-          <div class="c100 big {{ pie.1 }}" style="clear: both; margin-top: 20px;">
-                <span>{{ ratings.1 }}</span>
+          <div class="c100 big p{{ ratings.1|convert_100 }} " style="clear: both; margin-top: 20px;">
+                <span>{{ ratings.1|convert_10 }}</span>
                 <div class="slice">
                     <div class="bar"></div>
                     <div class="fill"></div>
@@ -65,11 +66,10 @@
               {{questions.1.text}}
           </div>
       </div>
-
-  <div class="clearfix visible-xs-block"></div>
+      <div class="clearfix visible-xs-block"></div>
       <div class="col-xs-6 col-sm-4 text-center">
-          <div class="c100 big {{ pie.2 }}" style="clear: both; margin-top: 20px;">
-                <span>{{ ratings.2 }}</span>
+          <div class="c100 big p{{ ratings.2|convert_100 }} " style="clear: both; margin-top: 20px;">
+                <span>{{ ratings.2|convert_10 }}</span>
                 <div class="slice">
                     <div class="bar"></div>
                     <div class="fill"></div>
@@ -79,12 +79,10 @@
               {{questions.2.text}}
           </div>
       </div>
-
-  <div class="clearfix visible-sm-block visible-md-block visible-lg-block"></div>
-
+      <div class="clearfix visible-sm-block visible-md-block visible-lg-block"></div>
       <div class="col-xs-6 col-sm-4 text-center">
-          <div class="c100 big {{ pie.3 }}" style="clear: both; margin-top: 20px;">
-                <span>{{ ratings.3 }}</span>
+          <div class="c100 big p{{ ratings.3|convert_100 }} " style="clear: both; margin-top: 20px;">
+                <span>{{ ratings.3|convert_10 }}</span>
                 <div class="slice">
                     <div class="bar"></div>
                     <div class="fill"></div>
@@ -94,11 +92,10 @@
               {{questions.3.text}}
           </div>
       </div>
-
-  <div class="clearfix visible-xs-block"></div>
+      <div class="clearfix visible-xs-block"></div>
       <div class="col-xs-6 col-sm-4 text-center">
-          <div class="c100 big {{ pie.4 }}" style="clear: both; margin-top: 20px;">
-                <span>{{ ratings.4 }}</span>
+          <div class="c100 big p{{ ratings.4|convert_100 }} " style="clear: both; margin-top: 20px;">
+                <span>{{ ratings.4|convert_10 }}</span>
                 <div class="slice">
                     <div class="bar"></div>
                     <div class="fill"></div>
@@ -109,8 +106,8 @@
           </div>
       </div>
       <div class="col-xs-6 col-sm-4 text-center">
-          <div class="c100 big {{ pie.5 }}" style="clear: both; margin-top: 20px;">
-                <span>{{ ratings.5 }}</span>
+          <div class="c100 big p{{ ratings.5|convert_100 }} " style="clear: both; margin-top: 20px;">
+                <span>{{ ratings.5|convert_10 }}</span>
                 <div class="slice">
                     <div class="bar"></div>
                     <div class="fill"></div>
@@ -122,7 +119,6 @@
       </div>
 
 
-
       <table class="table">
     </table>
   </div>
@@ -131,81 +127,100 @@
 <div class="container">
   <div class="row">
     {% for course in sections %}
-      <div class="col-md-4">
+      <div class="col-sm-6 col-md-4">
         <div class="panel panel-default">
           <div class="panel-heading"><a href= "{% url 'main:professor_full' course.instr_last_name course.instr_first_name %}" >
           <h3>{{ course.instr_first_name}} {{ course.instr_last_name }} - {{course.class_section}}</h3></a></div>
-          <table class="table table-striped">
-            <thead>
-              <th>Question</th>
-              <th>Rating</th>
-              <th>/5</th>
-            </thead>
+
+            <table class="table table-striped">
             <tr>
-              <td>Helpful Instructor?</td>
-              <td>
+                <td style="vertical-align: middle;">
+                    Helpful Instructor?
+                </td>
+                <td>
+                    <div class="c100 p{{ course.q1_average|convert_100 }} small">
+                        <span>{{ course.q1_average|convert_10 }}</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: middle;">
+                    Helpful Instructor?
+                </td>
+                <td>
+                    <div class="c100 p{{ course.q2_average|convert_100 }} small">
+                        <span>{{ course.q2_average|convert_10 }}</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: middle;">
+                    Helpful Instructor?
+                </td>
+                <td>
+                    <div class="c100 p{{ course.q3_average|convert_100 }} small">
+                        <span>{{ course.q3_average|convert_10 }}</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: middle;">
+                    Helpful Instructor?
+                </td>
+                <td>
+                    <div class="c100 p{{ course.q4_average|convert_100 }} small">
+                        <span>{{ course.q4_average|convert_10 }}</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: middle;">
+                    Helpful Instructor?
+                </td>
+                <td>
+                    <div class="c100 p{{ course.q5_average|convert_100 }} small">
+                        <span>{{ course.q5_average|convert_10 }}</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: middle;">
+                    Helpful Instructor?
+                </td>
+                <td>
+                    <div class="c100 p{{ course.q1_average|convert_100 }} small">
+                        <span>{{ course.q1_average|convert_10 }}</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
 
 
-            <div class="c100 {{ pie.5 }} small">
-                <span>{{ ratings.5 }}</span>
-                <div class="slice">
-                    <div class="bar"></div>
-                    <div class="fill"></div>
-                </div>
-            </div>
+            </table>
 
-                <div class="progress">
-                  <div class="progress-bar {% if course.q1_average > 4 %} progress-bar-success {% endif %} {% if course.q1_average < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio course.q1_average 1 20 %}%;"></div>
-                </div>
-              </td>
-              <td>{{ course.q1_average }}</td>
-            </tr>
-            <tr>
-              <td>Responsive Instructor?</td>
-              <td>
-                <div class="progress">
-                  <div class="progress-bar {% if course.q2_average > 4 %} progress-bar-success {% endif %} {% if course.q2_average < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio course.q2_average 1 20 %}%;"></div>
-                </div>
-              </td>
-              <td>{{ course.q2_average }}</td>
-            </tr>
-            <tr>
-              <td>Organized Course?</td>
-              <td>
-                <div class="progress">
-                  <div class="progress-bar {% if course.q3_average > 4 %} progress-bar-success {% endif %} {% if course.q3_average < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio course.q3_average 1 20 %}%;"></div>
-                </div>
-              </td>
-              <td>{{ course.q3_average }}</td>
-            </tr>
-            <tr>
-              <td>Advanced My Understanding?</td>
-              <td>
-                <div class="progress">
-                  <div class="progress-bar {% if course.q4_average > 4 %} progress-bar-success {% endif %} {% if course.q4_average < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio course.q4_average 1 20 %}%;"></div>
-                </div>
-              </td>
-              <td>{{ course.q4_average }}</td>
-            </tr>
-            <tr>
-              <td>Workload?</td>
-              <td>
-                <div class="progress">
-                  <div class="progress-bar {% if course.q5_average > 4 %} progress-bar-success {% endif %} {% if course.q5_average < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio course.q5_average 1 20 %}%;"></div>
-                </div>
-              </td>
-              <td>{{ course.q5_average }}</td>
-            </tr>
-            <tr>
-              <td>Would Recommend?</td>
-              <td>
-                <div class="progress">
-                  <div class="progress-bar {% if course.q6_average > 4 %} progress-bar-success {% endif %} {% if course.q6_average < 3 %} progress-bar-danger {% endif %}" role="progressbar" style="width: {% widthratio course.q6_average 1 20 %}%;"></div>
-                </div>
-              </td>
-              <td>{{ course.q6_average }}</td>
-            </tr>
-          </table>
         </div>
       </div>
     {% endfor %}
