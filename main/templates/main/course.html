@@ -38,9 +38,9 @@
 
     <h1 class="text-center">{{subj}} {{classcatnbr}}</h1>
 
-<h3 class="text-center">Summary Results</h3>
+<h3 class="text-center">Course Summary Results</h3>
 <div class="container">
-  <div class="panel panel-default">
+  <div class="panel panel-default" style="padding: 50px 0 50px;">
 
       <div class="col-xs-6 col-sm-4 text-center">
           <div class="c100 big p{{ ratings.0|convert_100 }} {{ ratings.0|color_rate }}" style="clear: both; margin-top: 20px;">
@@ -51,7 +51,7 @@
                 </div>
             </div>
           <div class="text-center" style="clear: both; margin-top: 10px;">
-              {{questions.0.text}} {{ ratings.0|color_rate }} {{ ratings.0}}
+              {{questions.0.text}}
           </div>
       </div>
       <div class="col-xs-6 col-sm-4 text-center">
@@ -149,7 +149,7 @@
             </tr>
             <tr>
                 <td style="vertical-align: middle;">
-                    Helpful Instructor?
+                    Responsive Instructor?
                 </td>
                 <td>
                     <div class="c100 p{{ course.q2_average|convert_100 }} small {{ course.q2_average|color_rate }}">
@@ -163,7 +163,7 @@
             </tr>
             <tr>
                 <td style="vertical-align: middle;">
-                    Helpful Instructor?
+                    Organized Course?
                 </td>
                 <td>
                     <div class="c100 p{{ course.q3_average|convert_100 }} small {{ course.q3_average|color_rate }}">
@@ -177,7 +177,7 @@
             </tr>
             <tr>
                 <td style="vertical-align: middle;">
-                    Helpful Instructor?
+                    Advanced My Understanding?
                 </td>
                 <td>
                     <div class="c100 p{{ course.q4_average|convert_100 }} small {{ course.q4_average|color_rate }}">
@@ -191,7 +191,7 @@
             </tr>
             <tr>
                 <td style="vertical-align: middle;">
-                    Helpful Instructor?
+                    Workload?
                 </td>
                 <td>
                     <div class="c100 p{{ course.q5_average|convert_100 }} small {{ course.q5_average|color_rate }}">
@@ -205,7 +205,7 @@
             </tr>
             <tr>
                 <td style="vertical-align: middle;">
-                    Helpful Instructor?
+                    Would Recommend?
                 </td>
                 <td>
                     <div class="c100 p{{ course.q1_average|convert_100 }} small {{ course.q6_average|color_rate }}">

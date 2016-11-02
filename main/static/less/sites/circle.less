@@ -75,7 +75,7 @@
         margin: 0 auto;
     }
 
-    // bigger size
+    // big size
     &.big{
         font-size: 100px;
     }
@@ -87,6 +87,18 @@
         &.big { font-size: 200px; }
     }
 
+    // bigger size
+    &.bigger{
+        font-size: 140px;
+    }
+
+    @media only screen and (min-width: 500px) {
+        &.bigger { font-size: 200px; }
+    }
+    @media only screen and (min-width: 750px) {
+        &.bigger { font-size: 240px; }
+    }
+
     // smaller size
     &.small{
         font-size: 80px;
@@ -96,7 +108,7 @@
         &.small { font-size: 90px; }
     }
     @media only screen and (min-width: 750px) {
-        &.small { font-size: 50px; }
+        &.small { font-size: 70px; }
     }
 
     // centered value inside circle

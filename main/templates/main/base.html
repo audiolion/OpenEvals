@@ -24,9 +24,10 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
+
         </button>
         <a class="navbar-brand" href="/" style="margin-top:-3px;">
-          <img src="{% static "brand.svg" %}" style="width:101px;"/>
+          <img src="{% static "brand.svg" %}" style="width:101px;">
         </a>
       </div>
       <div id="nav-collapse" class="navbar-collapse collapse"
@@ -35,9 +36,6 @@
           <li class="">
             <a href="{% url 'main:about' %}">About</a>
           </li>
-	  <li>
-	    <a href="http://goo.gl/forms/WiBZ03nZSZ">Beta Feedback</a>
-	  </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li>{% if not user.is_authenticated %}
@@ -94,7 +92,7 @@
             Available on GitHub.
           </a>
           <br>
-          <span class="footer-version">This software is in beta.</span>
+          <span class="footer-version">Contribute with Github</span>
         </p>
       </div>
     </div>
@@ -106,8 +104,6 @@
         </p>
         <p>
           <a href="/about">About OpenEvals</a>
-          <br>
-          <a href="/search">Search</a>
           <br>
         </p>
       </div>
