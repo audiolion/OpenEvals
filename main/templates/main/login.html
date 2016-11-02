@@ -4,19 +4,20 @@
 
 {% block banner %}
 {% load staticfiles %}
-<div class="container-fluid campus-carousel"style="background-image:url({% static "carousel.jpg"%})">
-  <div class="col-xs-12 col-sm-6 col-sm-offset-3" style="top:25%; margin-top:15px;">
-    <div class="carousel-description text-center"><h1>Log In</h1></div>
-  </div>
-</div>
 
 {% endblock %}
+{% block carousel %}
+{% endblock %}
+
+{% block cwidth %}height: 300px;{% endblock %}
 
 {% block content %}
+
 {% if form.errors  %}
+
 <div class="alert alert-danger">Incorrect username or password, or you're not a student.</div>
  {% endif %}
-<form action="{% url 'main:login' %}" method="POST">
+    <form action="{% url 'main:login' %}" method="POST">
   <div class="container">
   <div class="row"><div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12">
     <div class="panel panel-default">
@@ -31,10 +32,10 @@
           </tr>
         </table>
         <input type="submit" value="login" class="btn btn-primary form-control" />
-        <input type="hidden" name="next" value="{{ next }}" /> 
+        <input type="hidden" name="next" value="{{ next }}" />
     </div>
   </div></div>
   </div>
-
 </form>
+
 {% endblock %}

@@ -303,7 +303,7 @@ def get_results(request):
                 result_json['id'] = result.instr_full_name
                 result_json['label'] = result.instr_full_name
                 result_json['value'] = result.instr_full_name
-                result_json['url'] = "/professor/" + result.instr_last_name + "/" + result.instr_first_name
+                result_json['url'] = "/professor/" + result.instr_last_name + "/" + result.instr_first_name + "#results"
 
                 #"instr_last_name": "White",
                 #"instr_first_name": "Phillip",
@@ -316,7 +316,7 @@ def get_results(request):
                 result_json['id'] = result.class_subj + result.class_cat_nbr
                 result_json['label'] = result.class_subj + " - " + result.class_cat_nbr + " " + result.class_desc
                 result_json['value'] = result.class_subj + " " + result.class_cat_nbr
-                result_json['url'] = "/course/" + result.class_subj + "/" + result.class_cat_nbr
+                result_json['url'] = "/course/" + result.class_subj + "/" + result.class_cat_nbr + "#results"
                 foundC.append(result_json)
 
         found = foundC + foundP

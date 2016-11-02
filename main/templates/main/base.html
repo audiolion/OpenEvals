@@ -54,12 +54,12 @@
 
   {% endblock %}
 
-      <div class="container-fluid carousel" style="background-image:url({% static "carousel.jpg" %});background-attachment:fixed;">
+      <div class="container-fluid carousel" style="background-image:url({% static "carousel.jpg" %});background-attachment:fixed; {% block cwidth %}{% endblock %}">
     <div class="col-xs-12 col-sm-6 col-sm-offset-3" style="top:25%;
          margin-top:15px;">
         <h2 class="carousel-title text-center">OPENEVALS</h2>
         <div class="carousel-description text-center">
-          <h3>Course and Professor Evaluations.<br /> For students, by students.</h3>
+          <h3>{% block cdesc %}Course and Professor Evaluations.<br /> For students, by students.{% endblock %}</h3>
 {% block carousel %}
 
             {% endblock %}</div>

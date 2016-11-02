@@ -17,7 +17,7 @@
 {% endblock %}
 
 
-{{% block carousel %}
+{% block carousel %}
 
           <button class="btn btn-lg btn-outline-primary btn-main-search search-margin">
                 Search
@@ -35,8 +35,8 @@
 
 {% block content %}
 
-
-    <h1 class="text-center">{{subj}} {{classcatnbr}}</h1>
+<a name="results"></a>
+    <h1 class="text-center" style="margin-top: 50px;">{{subj}} {{classcatnbr}}</h1>
 
 <h3 class="text-center">Course Summary Results</h3>
 <div class="container">
@@ -129,7 +129,7 @@
     {% for course in sections %}
       <div class="col-sm-6 col-md-4">
         <div class="panel panel-default">
-          <div class="panel-heading"><a href= "{% url 'main:professor_full' course.instr_last_name course.instr_first_name %}" >
+          <div class="panel-heading"><a href= "{% url 'main:professor_full' course.instr_last_name course.instr_first_name %}#results" >
           <h3>{{ course.instr_first_name}} {{ course.instr_last_name }} - {{course.class_section}}</h3></a></div>
 
             <table class="table table-striped">
