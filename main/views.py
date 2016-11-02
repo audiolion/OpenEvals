@@ -45,7 +45,7 @@ def logout_view(request):
     return redirect('/')
 
 
-# @login_required
+@login_required
 def search(request, searchQ):
     if request.method == 'GET' and len(request.GET) > 0:
         form = SearchForm(request.GET)
@@ -71,7 +71,7 @@ def search(request, searchQ):
             return render(request, 'main/search.html', {'search_form': form})
 
 
-# @login_required
+@login_required
 def professor(request, lastname, firstname):
     form = SearchForm()
     lastname = lastname.title()
@@ -137,7 +137,7 @@ def create_course(course, fname, lname):
     return c
 
 
-# @login_required
+@login_required
 def course(request, subj, classcatnbr):
     form = SearchForm()
     # coursecode = coursecode.title()

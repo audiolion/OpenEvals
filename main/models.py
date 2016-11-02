@@ -4,12 +4,12 @@ class EvalQuestions(models.Model):
     number = models.IntegerField(db_column='QUESTION_NUMBER', primary_key=True)
     title = models.CharField(db_column='QUESTION_TITLE', max_length=100)
     text = models.CharField(db_column='QUESTION_TEXT', max_length=250)
-    #_database = "default"
+    _database = "default"
 
     class Meta:
-        managed = True
-        #db_table = '"EVAL_OWNER"."CLASS_EVAL_QUESTIONS"'
-        db_table = "main.EvalQuestions"
+        managed = False
+        db_table = '"EVAL_OWNER"."CLASS_EVAL_QUESTIONS"'
+        #db_table = "main.EvalQuestions"
 
 class EvalResults(models.Model):
     term_code = models.CharField(db_column='TERM_CODE', max_length=4)
@@ -33,12 +33,12 @@ class EvalResults(models.Model):
     q9_average = models.DecimalField(db_column='Q9_AVERAGE', max_digits=4, decimal_places=2)
     q10_average = models.DecimalField(db_column='Q10_AVERAGE', max_digits=4, decimal_places=2)
     campus = models.CharField(db_column='CAMPUS', max_length=5)
-    #_database = "default"
+    _database = "default"
 
     class Meta:
         managed = True
-        #db_table = '"EVAL_OWNER"."CLASS_EVAL_RESULTS"'
-        db_table = "main.EvalResults"
+        db_table = '"EVAL_OWNER"."CLASS_EVAL_RESULTS"'
+        #db_table = "main.EvalResults"
 
 class CustomRouter(object):
     def db_for_read(self,model, **hints):

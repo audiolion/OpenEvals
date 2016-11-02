@@ -107,24 +107,24 @@ WSGI_APPLICATION = 'OpenEvals.wsgi.application'
 DATABASE_ROUTERS = ['main.models.CustomRouter']
 
 DATABASES = {
-    'default': {
-        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        #'NAME': '/var/www/evals/user',
-        'NAME': 'user.db',
-        #'USER': secrets.USER,
-        #'PASSWORD': secrets.PASSWORD,
-        #'HOST': secrets.HOST,
-        #'PORT': secrets.PORT,
-        'ENGINE': 'django.db.backends.sqlite3',
-    },
-#    'oracle': {
-#        'ENGINE': 'django.db.backends.oracle',
-#        'NAME': secrets.ORACLE_NAME,
-#        'USER': secrets.ORACLE_USER,
-#        'PASSWORD': secrets.ORACLE_PASSWORD,
-#        'HOST': secrets.ORACLE_HOST,
-#        'PORT': secrets.ORACLE_PORT,
-#    }
+#    'default': {
+#        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        #'NAME': '/var/www/evals/user',
+#        'NAME': 'user.db',
+#        #'USER': secrets.USER,
+#        #'PASSWORD': secrets.PASSWORD,
+#        #'HOST': secrets.HOST,
+#        #'PORT': secrets.PORT,
+#        'ENGINE': 'django.db.backends.sqlite3',
+#    },
+    'oracle': {
+        'ENGINE': 'django.db.backends.oracle',
+        'NAME': secrets.ORACLE_NAME,
+        'USER': secrets.ORACLE_USER,
+        'PASSWORD': secrets.ORACLE_PASSWORD,
+        'HOST': secrets.ORACLE_HOST,
+        'PORT': secrets.ORACLE_PORT,
+    }
 
 }
 
