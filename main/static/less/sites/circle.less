@@ -7,17 +7,22 @@
 @secondary-color: #eee;
 @bg-color: #fff;
 
-@primary-color-green: #4db53c;
-@primary-color-orange: #dd9d22;
-
-
 // colors dark skin
 @primary-color-dark: #c6ff00;
 @secondary-color-dark: #777;
 @bg-color-dark: #666;
 
+// Color schemes
+@primary-color-green: #4db53c;
 @primary-color-green-dark: #5fd400;
+
+@primary-color-orange: #dd9d22;
 @primary-color-orange-dark: #e08833;
+
+@color-scale-1: #710000;
+@color-scale-2: #F36E21;
+@color-scale-3: #edcd00;
+@color-scale-4: #81cc0a;
 
 // mixins
 @import "mixins.less";
@@ -252,6 +257,40 @@
 
         &:hover{
             > span { color: @primary-color-orange-dark;}
+        }
+    }
+
+    //color-scales
+
+    &.color-scale-rate-1{
+        .bar, .fill { border-color: @color-scale-1 !important;}
+
+        &:hover{
+            > span { color: @color-scale-1;}
+        }
+    }
+
+    &.color-scale-rate-2{
+        .bar, .fill { border-color: @color-scale-2 !important;}
+
+        &:hover{
+            > span { color: @color-scale-2;}
+        }
+    }
+
+    &.color-scale-rate-3{
+        .bar, .fill { border-color: @color-scale-3 !important;}
+
+        &:hover{
+            > span { color: @color-scale-3;}
+        }
+    }
+
+    &.color-scale-rate-4{
+        .bar, .fill { border-color: @color-scale-4 !important;}
+
+        &:hover{
+            > span { color: @color-scale-4;}
         }
     }
 }

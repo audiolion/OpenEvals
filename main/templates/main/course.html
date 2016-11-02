@@ -43,7 +43,7 @@
   <div class="panel panel-default">
 
       <div class="col-xs-6 col-sm-4 text-center">
-          <div class="c100 big p{{ ratings.0|convert_100 }} " style="clear: both; margin-top: 20px;">
+          <div class="c100 big p{{ ratings.0|convert_100 }} {{ ratings.0|color_rate }}" style="clear: both; margin-top: 20px;">
                 <span>{{ ratings.0|convert_10 }}</span>
                 <div class="slice">
                     <div class="bar"></div>
@@ -51,11 +51,11 @@
                 </div>
             </div>
           <div class="text-center" style="clear: both; margin-top: 10px;">
-              {{questions.0.text}}
+              {{questions.0.text}} {{ ratings.0|color_rate }} {{ ratings.0}}
           </div>
       </div>
       <div class="col-xs-6 col-sm-4 text-center">
-          <div class="c100 big p{{ ratings.1|convert_100 }} " style="clear: both; margin-top: 20px;">
+          <div class="c100 big p{{ ratings.1|convert_100 }} {{ ratings.1|color_rate }}" style="clear: both; margin-top: 20px;">
                 <span>{{ ratings.1|convert_10 }}</span>
                 <div class="slice">
                     <div class="bar"></div>
@@ -68,7 +68,7 @@
       </div>
       <div class="clearfix visible-xs-block"></div>
       <div class="col-xs-6 col-sm-4 text-center">
-          <div class="c100 big p{{ ratings.2|convert_100 }} " style="clear: both; margin-top: 20px;">
+          <div class="c100 big p{{ ratings.2|convert_100 }} {{ ratings.2|color_rate }} " style="clear: both; margin-top: 20px;">
                 <span>{{ ratings.2|convert_10 }}</span>
                 <div class="slice">
                     <div class="bar"></div>
@@ -81,7 +81,7 @@
       </div>
       <div class="clearfix visible-sm-block visible-md-block visible-lg-block"></div>
       <div class="col-xs-6 col-sm-4 text-center">
-          <div class="c100 big p{{ ratings.3|convert_100 }} " style="clear: both; margin-top: 20px;">
+          <div class="c100 big p{{ ratings.3|convert_100 }} {{ ratings.3|color_rate }}" style="clear: both; margin-top: 20px;">
                 <span>{{ ratings.3|convert_10 }}</span>
                 <div class="slice">
                     <div class="bar"></div>
@@ -94,7 +94,7 @@
       </div>
       <div class="clearfix visible-xs-block"></div>
       <div class="col-xs-6 col-sm-4 text-center">
-          <div class="c100 big p{{ ratings.4|convert_100 }} " style="clear: both; margin-top: 20px;">
+          <div class="c100 big p{{ ratings.4|convert_100 }} {{ ratings.4|color_rate }}" style="clear: both; margin-top: 20px;">
                 <span>{{ ratings.4|convert_10 }}</span>
                 <div class="slice">
                     <div class="bar"></div>
@@ -106,7 +106,7 @@
           </div>
       </div>
       <div class="col-xs-6 col-sm-4 text-center">
-          <div class="c100 big p{{ ratings.5|convert_100 }} " style="clear: both; margin-top: 20px;">
+          <div class="c100 big p{{ ratings.5|convert_100 }} {{ ratings.5|color_rate }}" style="clear: both; margin-top: 20px;">
                 <span>{{ ratings.5|convert_10 }}</span>
                 <div class="slice">
                     <div class="bar"></div>
