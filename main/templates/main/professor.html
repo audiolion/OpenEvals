@@ -43,7 +43,7 @@
   <div class="panel panel-default">
 
       <div class="col-xs-6 col-sm-4 text-center">
-          <div class="c100 big p{{ ratings.0|convert_100 }} " style="clear: both; margin-top: 20px;">
+          <div class="c100 big p{{ ratings.0|convert_100 }} {{ ratings.0|color_rate }}" style="clear: both; margin-top: 20px;">
                 <span>{{ ratings.0|convert_10 }}</span>
                 <div class="slice">
                     <div class="bar"></div>
@@ -55,7 +55,7 @@
           </div>
       </div>
       <div class="col-xs-6 col-sm-4 text-center">
-          <div class="c100 big p{{ ratings.1|convert_100 }} " style="clear: both; margin-top: 20px;">
+          <div class="c100 big p{{ ratings.1|convert_100 }} {{ ratings.1|color_rate }}" style="clear: both; margin-top: 20px;">
                 <span>{{ ratings.1|convert_10 }}</span>
                 <div class="slice">
                     <div class="bar"></div>
@@ -68,7 +68,7 @@
       </div>
       <div class="clearfix visible-xs-block"></div>
       <div class="col-xs-6 col-sm-4 text-center">
-          <div class="c100 big p{{ ratings.2|convert_100 }} " style="clear: both; margin-top: 20px;">
+          <div class="c100 big p{{ ratings.2|convert_100 }} {{ ratings.2|color_rate }}" style="clear: both; margin-top: 20px;">
                 <span>{{ ratings.2|convert_10 }}</span>
                 <div class="slice">
                     <div class="bar"></div>
@@ -81,7 +81,7 @@
       </div>
       <div class="clearfix visible-sm-block visible-md-block visible-lg-block"></div>
       <div class="col-xs-6 col-sm-4 text-center">
-          <div class="c100 big p{{ ratings.3|convert_100 }} " style="clear: both; margin-top: 20px;">
+          <div class="c100 big p{{ ratings.3|convert_100 }} {{ ratings.3|color_rate }}" style="clear: both; margin-top: 20px;">
                 <span>{{ ratings.3|convert_10 }}</span>
                 <div class="slice">
                     <div class="bar"></div>
@@ -94,7 +94,7 @@
       </div>
       <div class="clearfix visible-xs-block"></div>
       <div class="col-xs-6 col-sm-4 text-center">
-          <div class="c100 big p{{ ratings.4|convert_100 }} " style="clear: both; margin-top: 20px;">
+          <div class="c100 big p{{ ratings.4|convert_100 }} {{ ratings.4|color_rate }}" style="clear: both; margin-top: 20px;">
                 <span>{{ ratings.4|convert_10 }}</span>
                 <div class="slice">
                     <div class="bar"></div>
@@ -106,7 +106,7 @@
           </div>
       </div>
       <div class="col-xs-6 col-sm-4 text-center">
-          <div class="c100 big p{{ ratings.5|convert_100 }} " style="clear: both; margin-top: 20px;">
+          <div class="c100 big p{{ ratings.5|convert_100 }} {{ ratings.5|color_rate }}" style="clear: both; margin-top: 20px;">
                 <span>{{ ratings.5|convert_10 }}</span>
                 <div class="slice">
                     <div class="bar"></div>
@@ -138,7 +138,7 @@
                     Helpful Instructor?
                 </td>
                 <td>
-                    <div class="c100 p{{ course.q1_average|convert_100 }} small">
+                    <div class="c100 p{{ course.q1_average|convert_100 }} small {{ course.q1_average|color_rate }}">
                         <span>{{ course.q1_average|convert_10 }}</span>
                         <div class="slice">
                             <div class="bar"></div>
@@ -152,7 +152,7 @@
                     Helpful Instructor?
                 </td>
                 <td>
-                    <div class="c100 p{{ course.q2_average|convert_100 }} small">
+                    <div class="c100 p{{ course.q2_average|convert_100 }} small {{ course.q2_average|color_rate }}">
                         <span>{{ course.q2_average|convert_10 }}</span>
                         <div class="slice">
                             <div class="bar"></div>
@@ -166,7 +166,7 @@
                     Helpful Instructor?
                 </td>
                 <td>
-                    <div class="c100 p{{ course.q3_average|convert_100 }} small">
+                    <div class="c100 p{{ course.q3_average|convert_100 }} small {{ course.q3_average|color_rate }}">
                         <span>{{ course.q3_average|convert_10 }}</span>
                         <div class="slice">
                             <div class="bar"></div>
@@ -180,7 +180,7 @@
                     Helpful Instructor?
                 </td>
                 <td>
-                    <div class="c100 p{{ course.q4_average|convert_100 }} small">
+                    <div class="c100 p{{ course.q4_average|convert_100 }} small {{ course.q4_average|color_rate }}">
                         <span>{{ course.q4_average|convert_10 }}</span>
                         <div class="slice">
                             <div class="bar"></div>
@@ -194,7 +194,7 @@
                     Helpful Instructor?
                 </td>
                 <td>
-                    <div class="c100 p{{ course.q5_average|convert_100 }} small">
+                    <div class="c100 p{{ course.q5_average|convert_100 }} small {{ course.q5_average|color_rate }}">
                         <span>{{ course.q5_average|convert_10 }}</span>
                         <div class="slice">
                             <div class="bar"></div>
@@ -208,7 +208,7 @@
                     Helpful Instructor?
                 </td>
                 <td>
-                    <div class="c100 p{{ course.q1_average|convert_100 }} small">
+                    <div class="c100 p{{ course.q1_average|convert_100 }} small {{ ratings.0|color_rate }}">
                         <span>{{ course.q1_average|convert_10 }}</span>
                         <div class="slice">
                             <div class="bar"></div>

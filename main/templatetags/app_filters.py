@@ -4,11 +4,11 @@ register = template.Library()
 
 @register.filter(name='convert_100')
 def convert_100(value):
-    return int(float(value-1)*float(24.75))
+    return int(float(value-1)*float(25))
 
 @register.filter(name='convert_10')
 def convert_10(value):
-    return str(round(float(value-1)*float(2.25), 2))
+    return str(round(float(value-1)*float(2.24), 2))
 
 @register.filter(name='color_rate')
 def color_rate(value):
