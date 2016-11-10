@@ -27,8 +27,7 @@ SECRET_KEY = secrets.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-
-ALLOWED_HOSTS = ['openevals.rit.edu','evals.rit.edu']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -59,7 +58,11 @@ STATICFILES_FINDERS = (
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+STATIC_ROOT = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
 
 STATIC_PRECOMPILER_COMPILERS = (
     ('static_precompiler.compilers.LESS', {
@@ -107,16 +110,16 @@ WSGI_APPLICATION = 'OpenEvals.wsgi.application'
 DATABASE_ROUTERS = ['main.models.CustomRouter']
 
 DATABASES = {
-#    'default': {
-#        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        #'NAME': '/var/www/evals/user',
-#        'NAME': 'user.db',
-#        #'USER': secrets.USER,
-#        #'PASSWORD': secrets.PASSWORD,
-#        #'HOST': secrets.HOST,
-#        #'PORT': secrets.PORT,
-#        'ENGINE': 'django.db.backends.sqlite3',
-#    },
+    'default': {
+        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': secrets.NAME,
+        'USER': secrets.USER,
+        'PASSWORD': secrets.PASSWORD,
+        #'HOST': secrets.HOST,
+        #'PORT': secrets.PORT,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'user'
+    },
     'oracle': {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': secrets.ORACLE_NAME,
@@ -166,7 +169,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
+STATIC_URL = '/static/'
