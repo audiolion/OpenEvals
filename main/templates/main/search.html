@@ -1,0 +1,95 @@
+{% extends "main/base.html" %}
+
+{% block title %}Search OpenEvals{% endblock %}
+
+{% load staticfiles %}
+{% block carousel %}
+
+        <form class="main search-margin" action="{% url 'main:search' "" %}" method="get">
+            {{ search_form }}
+        </form>
+
+{% endblock carousel %}
+{% block content %}
+
+
+    
+  <div class="container">
+
+  {% if not courses %}
+
+      <div class="col-md-12 text-center">
+
+      </div>
+  {% endif %}
+    <div class="col-md-6">
+      <h1 class="text-center">Courses</h1>
+      <div class="row">
+        {% for course in courses  %}
+        <a href= "{% url 'main:course_full' course.subj course.classcatnbr %}#results" >
+          <div class="square col-xs-12">
+            <div class="square-content" style="height:auto;">
+            <h4>{{ course.title }}</h4>
+              <h3 style="color:black;">{{course.subj}} - {{course.classcatnbr}}</h3>
+              <h4 class="primary_link">
+                {% for prof in course.professors %}
+                <a href="{% url 'main:professor_full' prof.lname prof.fname %}#results" class="primary_link" >
+                  {{ prof.fname }} {{ prof.lname }}&nbsp;
+                </a>
+                {% endfor %}
+                {{ course.ellipses }}
+              </h4>
+              <h4 class="secondary_link">
+                {% for campus in course.campus %}
+                {{ campus }},
+                {% endfor %}
+                {{ course.numSections }} Section{% if course.numSections > 1 %}s{% endif %} 
+              </h4>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+	  <div class="alert alert-danger">Missing a course? Only courses that receive enough evaluations are reflected here. Always fill out your SmartEvals surveys!</div>
+
+    </div>
+    <div class="col-md-6">
+      <h1 class="text-center">Professors</h1>
+      <div class="row">
+        {% for prof in professors %}
+        <a href= "{% url 'main:professor_full' prof.lname prof.fname  %}#results" >
+          <div class="square col-xs-12">
+            <div class="square-content" style="height: auto;">
+              <div class="row">
+                <div class="col-xs-6"><h2 style="color: black;">{{ prof.fname }} {{ prof.lname }}</h2></div>
+                <div class="col-xs-6">
+                  <h2 style="color: black; text-align: right">
+                    <a href="{% url 'main:search' prof.commonCourse %}#results" style="color:black">
+                      {{ prof.commonCourse }}
+                    </a>
+                  </h2>
+                </div>
+              </div>
+              <h4>
+                {% for course in prof.tileCourses %}
+                <a href="{% url 'main:course_full' course.subj course.classcatnbr %}#results"  class="primary_link">
+                  {{ course.subj }}-{{ course.classcatnbr }}&nbsp;
+                </a>
+                {% endfor %}
+                {{ prof.ellipses }}
+              </h4>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+       <div class="alert alert-danger">Missing a professor? Only professors who had courses that received enough evaluations, and that have been teaching for at least two semesters, are reflected here. Always fill out your SmartEvals surveys!</div>
+
+    </div>
+
+  </div>
+{% block footer %}
+    {{ search_form.media }}
+{% endblock %}
+
+{% endblock %}

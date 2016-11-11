@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}OpenEvals{% endblock %}</title>
+    {% load staticfiles %}
+    {% load compress %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700' rel='stylesheet' type='text/css'>
+    <script src="https://code.jquery.com/jquery-1.12.2.min.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" crossorigin="anonymous"></script>
+    <script src="{% static 'js/search-autocomplete.js' %}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    {% compress css %}
+    <link rel="stylesheet" type="text/less" media="all" href="{% static 'less/style.less' %}" />
+    {% endcompress %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.css' %}"/>
+</head>
+<body>
+  <nav class="header-background navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+
+        </button>
+        <a class="navbar-brand" href="/" style="margin-top:-3px;">
+          <img src="{% static "brand.svg" %}" style="width:101px;">
+        </a>
+      </div>
+      <div id="nav-collapse" class="navbar-collapse collapse"
+            style="border: 0px none; height: 0px;">
+        <ul class="nav navbar-nav navbar-left">
+          <li class="">
+            <a href="{% url 'main:about' %}">About</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>{% if not user.is_authenticated %}
+            <a href="{% url 'main:login' %}">Log In</a>
+		{% endif %}
+		{% if user.is_authenticated %}
+	    <a href="{% url 'main:logout' %}">Log Out</a>
+		{% endif %}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  {% block banner %}
+
+
+  {% endblock %}
+
+      <div class="container-fluid carousel" style="background-image:url({% static "carousel.jpg" %});background-attachment:fixed; {% block cwidth %}{% endblock %}">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3" style="top:25%;
+         margin-top:15px;">
+        <h2 class="carousel-title text-center">OPENEVALS</h2>
+        <div class="carousel-description text-center">
+          <h3>{% block cdesc %}Course and Professor Evaluations.<br /> For students, by students.{% endblock %}</h3>
+{% block carousel %}
+
+            {% endblock %}</div>
+        </div>
+
+
+    </div>
+    </div>
+
+  {% block content %}
+
+  {% endblock  %}
+  <div class="footer">
+
+    <div class="footer-left col-lg-6 col-md-6 col-sm-6">
+      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-4">
+        <p class="footer-subtitle">
+          About
+        </p>
+        <p style="font-size: 20px;">
+          OpenEvals is the way RIT students learn about professors and courses.
+        </p>
+        <p style="font-size: 15px;">
+          <a href="https://sg.rit.edu/">
+            &copy;&nbsp;&nbsp; RIT Student Government 2016.
+          </a>
+          <br>
+          <a href="https://github.com/ritstudentgovernment/OpenEvals">
+            <span class="glyphicon glyphicon-link"></span>
+            Available on GitHub.
+          </a>
+          <br>
+          <span class="footer-version">Contribute with Github</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-right col-lg-6 col-md-6 col-sm-6">
+      <div class="col-sm-6 col-sm-offset-1 col-md-4 col-md-offset-1">
+        <p class="footer-subtitle">
+          Learn More
+        </p>
+        <p>
+          <a href="/about">About OpenEvals</a>
+          <br>
+        </p>
+      </div>
+      <div class="col-sm-3 footer-count">
+        <div class="footer-subtitle">
+          Services
+        </div>
+        <p>
+          <a href="https://pawprints.rit.edu">PawPrints</a>
+          <br>
+          <a href="https://ritpedia.rit.edu">RITPedia</a>
+          <br>
+          <a href="https://bikeshare.rit.edu">Bikeshare</a>
+          <br>
+          <a href="https://sites.sg.rit.edu">SG Sites</a>
+        </p>
+      </div>
+    </div>
+
+  </div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-54477255-8', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>
