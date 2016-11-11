@@ -4,15 +4,37 @@
 
 {% block banner %}
 {% load staticfiles %}
+{% load app_filters %}
+
+    <!--
 <div class="container-fluid campus-carousel"style="background-image:url({% static "carousel.jpg"%})">
   <div class="col-xs-12 col-sm-6 col-sm-offset-3" style="top:25%; margin-top:15px;">
     <div class="carousel-description text-center"><h1>{{subj}} {{classcatnbr}}</h1></div>
   </div>
 </div>
+-->
 
 {% endblock %}
 
+
+{% block carousel %}
+
+          <button class="btn btn-lg btn-outline-primary btn-main-search search-margin">
+                Search
+                <span class="glyphicon glyphicon-search carousel-search-icon"></span>
+              </button>
+
+    <form class="search-margin search-bar-hide" action="{% url 'main:search' "" %}" method="get">
+            {{ search_form }}
+        </form>
+
+    <button class="btn btn-lg btn-outline-primary btn-main-search-x search-margin">
+    Cancel <span class="glyphicon glyphicon-remove carousel-search-icon" aria-hidden="true"></span>
+    </button>
+{% endblock %}
+
 {% block content %}
+<<<<<<< HEAD
 <h2 class="text-center">Summary Results</h2>
 <div class="container">
   <div class="panel panel-default">
@@ -76,6 +98,94 @@
         </td>
         <td>{{ratings.5}}</td>
       </tr>
+=======
+
+<a name="results"></a>
+    <h1 class="text-center" style="margin-top: 50px;">{{subj}} {{classcatnbr}}</h1>
+
+<h3 class="text-center">Course Summary Results</h3>
+<div class="container">
+  <div class="panel panel-default" style="padding: 50px 0 50px;">
+
+      <div class="col-xs-6 col-sm-4 text-center">
+          <div class="c100 big p{{ ratings.0|convert_100 }} {{ ratings.0|color_rate }}" style="clear: both; margin-top: 20px;">
+                <span>{{ ratings.0|convert_10 }}</span>
+                <div class="slice">
+                    <div class="bar"></div>
+                    <div class="fill"></div>
+                </div>
+            </div>
+          <div class="text-center" style="clear: both; margin-top: 10px;">
+              {{questions.0.text}}
+          </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 text-center">
+          <div class="c100 big p{{ ratings.1|convert_100 }} {{ ratings.1|color_rate }}" style="clear: both; margin-top: 20px;">
+                <span>{{ ratings.1|convert_10 }}</span>
+                <div class="slice">
+                    <div class="bar"></div>
+                    <div class="fill"></div>
+                </div>
+            </div>
+          <div class="text-center" style="clear: both; margin-top: 10px;">
+              {{questions.1.text}}
+          </div>
+      </div>
+      <div class="clearfix visible-xs-block"></div>
+      <div class="col-xs-6 col-sm-4 text-center">
+          <div class="c100 big p{{ ratings.2|convert_100 }} {{ ratings.2|color_rate }} " style="clear: both; margin-top: 20px;">
+                <span>{{ ratings.2|convert_10 }}</span>
+                <div class="slice">
+                    <div class="bar"></div>
+                    <div class="fill"></div>
+                </div>
+            </div>
+          <div class="text-center" style="clear: both; margin-top: 10px;">
+              {{questions.2.text}}
+          </div>
+      </div>
+      <div class="clearfix visible-sm-block visible-md-block visible-lg-block"></div>
+      <div class="col-xs-6 col-sm-4 text-center">
+          <div class="c100 big p{{ ratings.3|convert_100 }} {{ ratings.3|color_rate }}" style="clear: both; margin-top: 20px;">
+                <span>{{ ratings.3|convert_10 }}</span>
+                <div class="slice">
+                    <div class="bar"></div>
+                    <div class="fill"></div>
+                </div>
+            </div>
+          <div class="text-center" style="clear: both; margin-top: 10px;">
+              {{questions.3.text}}
+          </div>
+      </div>
+      <div class="clearfix visible-xs-block"></div>
+      <div class="col-xs-6 col-sm-4 text-center">
+          <div class="c100 big p{{ ratings.4|convert_100 }} {{ ratings.4|color_rate }}" style="clear: both; margin-top: 20px;">
+                <span>{{ ratings.4|convert_10 }}</span>
+                <div class="slice">
+                    <div class="bar"></div>
+                    <div class="fill"></div>
+                </div>
+            </div>
+          <div class="text-center" style="clear: both; margin-top: 10px;">
+              {{questions.4.text}}
+          </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 text-center">
+          <div class="c100 big p{{ ratings.5|convert_100 }} {{ ratings.5|color_rate }}" style="clear: both; margin-top: 20px;">
+                <span>{{ ratings.5|convert_10 }}</span>
+                <div class="slice">
+                    <div class="bar"></div>
+                    <div class="fill"></div>
+                </div>
+            </div>
+          <div class="text-center" style="clear: both; margin-top: 10px;">
+              {{questions.5.text}}
+          </div>
+      </div>
+
+
+      <table class="table">
+>>>>>>> master
     </table>
   </div>
 </div>
@@ -83,6 +193,7 @@
 <div class="container">
   <div class="row">
     {% for course in sections %}
+<<<<<<< HEAD
       <div class="col-md-4">
         <div class="panel panel-default">
           <div class="panel-heading"><a href= "{% url 'main:professor_full' course.instr_last_name course.instr_first_name %}" >
@@ -148,6 +259,102 @@
               <td>{{ course.q6_average }}</td>
             </tr>
           </table>
+=======
+      <div class="col-sm-6 col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading"><a href= "{% url 'main:professor_full' course.instr_last_name course.instr_first_name %}#results" >
+          <h3>{{ course.instr_first_name}} {{ course.instr_last_name }} - {{course.class_section}}</h3></a></div>
+
+            <table class="table table-striped">
+            <tr>
+                <td style="vertical-align: middle;">
+                    Helpful Instructor?
+                </td>
+                <td>
+                    <div class="c100 p{{ course.q1_average|convert_100 }} small {{ course.q1_average|color_rate }}">
+                        <span>{{ course.q1_average|convert_10 }}</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: middle;">
+                    Responsive Instructor?
+                </td>
+                <td>
+                    <div class="c100 p{{ course.q2_average|convert_100 }} small {{ course.q2_average|color_rate }}">
+                        <span>{{ course.q2_average|convert_10 }}</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: middle;">
+                    Organized Course?
+                </td>
+                <td>
+                    <div class="c100 p{{ course.q3_average|convert_100 }} small {{ course.q3_average|color_rate }}">
+                        <span>{{ course.q3_average|convert_10 }}</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: middle;">
+                    Advanced My Understanding?
+                </td>
+                <td>
+                    <div class="c100 p{{ course.q4_average|convert_100 }} small {{ course.q4_average|color_rate }}">
+                        <span>{{ course.q4_average|convert_10 }}</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: middle;">
+                    Workload?
+                </td>
+                <td>
+                    <div class="c100 p{{ course.q5_average|convert_100 }} small {{ course.q5_average|color_rate }}">
+                        <span>{{ course.q5_average|convert_10 }}</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: middle;">
+                    Would Recommend?
+                </td>
+                <td>
+                    <div class="c100 p{{ course.q1_average|convert_100 }} small {{ course.q6_average|color_rate }}">
+                        <span>{{ course.q1_average|convert_10 }}</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+
+            </table>
+
+>>>>>>> master
         </div>
       </div>
     {% endfor %}

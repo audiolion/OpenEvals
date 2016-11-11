@@ -1,0 +1,26 @@
+{% extends "main/base.html" %}
+
+{% block title %}About OpenEvals{% endblock %}
+
+{% block carousel %}
+    <div class="carousel-description text-center"><h2>Browse</h2></div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <hr />
+  <div class="panel panel-default">
+    <div class="panel-body">
+
+        {% for subject in subjects %}
+            <div class="col-md-3">
+            <button class="btn-lg btn-primary btn-browse">{{ subject }}</button>
+            </div>
+        {% endfor %}
+
+
+
+    </div>
+  </div>
+</div>
+{% endblock %}

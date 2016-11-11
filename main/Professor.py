@@ -14,7 +14,7 @@ class Professor():
             self.tileCourses.append(course)
 
         if(len(self.tileCourses) == 3): #add the ellipses if this tile has 3 courses
-            self.ellipses = "..."
+            self.ellipses =  "..."
     def setCommonCourse(self):
         subjects = list()
         for course in self.courses:

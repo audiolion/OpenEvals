@@ -5,7 +5,7 @@
     "fields": {
       "number": "1",
       "title": "Quality",
-      "text": "Did this professor provide quality instruction?"
+      "text": "The instructor was available for appropriate consultation (online and/or face-to-face) outside of class."
     }
   },
   {
@@ -14,7 +14,7 @@
     "fields": {
       "number": "2",
       "title": "Timeliness",
-      "text": "Did this professor return tests and quizzes in a timely fashion?"
+      "text": "The instructor provided timely feedback on assignments and tests."
     }
   },
   {
@@ -23,7 +23,7 @@
     "fields": {
       "number": "3",
       "title": "Mycourses",
-      "text": "Did this professor use MyCourses"
+      "text": "The course was well organized."
     }
   },
   {
@@ -32,7 +32,25 @@
     "fields": {
       "number": "4",
       "title": "Textbook",
-      "text": "Did this course make good use of the textbook?"
+      "text": "This course advanced my understanding of the subject."
+    }
+  },
+  {
+    "model": "main.EvalQuestions",
+    "pk": 5,
+    "fields": {
+      "number": "5",
+      "title": "Textbook",
+      "text": "Compared to similar courses, the amount of work (reading, writing, etc.) in this course was:"
+    }
+  },
+  {
+    "model": "main.EvalQuestions",
+    "pk": 6,
+    "fields": {
+      "number": "6",
+      "title": "Textbook",
+      "text": "Overall, I would recommend this course to other students."
     }
   },
   {
@@ -46,19 +64,19 @@
       "instr_last_name": "Martinez",
       "instr_first_name": "Kenneth",
       "class_subj": "SWEN",
-      "class_cat_nbr": "",
+      "class_cat_nbr": "261",
       "class_section": "01",
       "class_number": "13563",
-      "q1_average": "76.95",
-      "q2_average": "64.56",
-      "q3_average": "55.67",
-      "q4_average" : "99.75",
-      "q5_average" : "33.45",
-      "q6_average" : "63.45",
-      "q7_average" : "64.23",
-      "q8_average" : "71.35",
-      "q9_average" : "57.89",
-      "q10_average" : "98.23",
+      "q1_average": "4.95",
+      "q2_average": "4.56",
+      "q3_average": "3.67",
+      "q4_average" : "2.75",
+      "q5_average" : "3.45",
+      "q6_average" : "3.45",
+      "q7_average" : "4.23",
+      "q8_average" : "1.35",
+      "q9_average" : "3.89",
+      "q10_average" : "4.23",
       "campus" : "RIT Main"
     }
   },
@@ -69,23 +87,153 @@
       "term_code": "2161",
       "class_code": "250",
       "class_desc": "Concepts of Computer Systems",
-      "instr_full_name": "Phillip WHite",
+      "instr_full_name": "Phillip White",
       "instr_last_name": "White",
       "instr_first_name": "Phillip",
       "class_subj": "CSCI",
-      "class_cat_nbr": "",
+      "class_cat_nbr": "250",
       "class_section": "01",
       "class_number": "50797",
-      "q1_average": "76.95",
-      "q2_average": "64.56",
-      "q3_average": "55.67",
-      "q4_average" : "99.75",
-      "q5_average" : "33.45",
-      "q6_average" : "63.45",
-      "q7_average" : "64.23",
-      "q8_average" : "71.35",
-      "q9_average" : "57.89",
-      "q10_average" : "98.23",
+      "q1_average": "2.95",
+      "q2_average": "4.56",
+      "q3_average": "2.67",
+      "q4_average" : "3.75",
+      "q5_average" : "3.45",
+      "q6_average" : "3.45",
+      "q7_average" : "4.23",
+      "q8_average" : "1.35",
+      "q9_average" : "4.89",
+      "q10_average" : "2.23",
+      "campus" : "RIT Main"
+    }
+  }, {
+    "model": "main.EvalResults",
+    "pk": 3,
+    "fields": {
+      "term_code": "2161",
+      "class_code": "250",
+      "class_desc": "Concepts of Computer Systems",
+      "instr_full_name": "Adam White",
+      "instr_last_name": "White",
+      "instr_first_name": "Adam",
+      "class_subj": "CSCI",
+      "class_cat_nbr": "250",
+      "class_section": "03",
+      "class_number": "50727",
+      "q1_average": "3.95",
+      "q2_average": "4.56",
+      "q3_average": "4.67",
+      "q4_average" : "3.75",
+      "q5_average" : "3.45",
+      "q6_average" : "3.45",
+      "q7_average" : "4.23",
+      "q8_average" : "1.35",
+      "q9_average" : "3.89",
+      "q10_average" : "3.23",
+      "campus" : "RIT Main"
+    }
+  }, {
+    "model": "main.EvalResults",
+    "pk": 4,
+    "fields": {
+      "term_code": "2161",
+      "class_code": "250",
+      "class_desc": "Concepts of Computer Systems",
+      "instr_full_name": "Greg White",
+      "instr_last_name": "White",
+      "instr_first_name": "Greg",
+      "class_subj": "CSCI",
+      "class_cat_nbr": "250",
+      "class_section": "04",
+      "class_number": "51797",
+      "q1_average": "4.95",
+      "q2_average": "4.56",
+      "q3_average": "3.67",
+      "q4_average" : "2.75",
+      "q5_average" : "3.45",
+      "q6_average" : "3.45",
+      "q7_average" : "4.23",
+      "q8_average" : "3.35",
+      "q9_average" : "2.89",
+      "q10_average" : "4.23",
+      "campus" : "RIT Main"
+    }
+  }, {
+    "model": "main.EvalResults",
+    "pk": 5,
+    "fields": {
+      "term_code": "2161",
+      "class_code": "250",
+      "class_desc": "Concepts of Computer Systems",
+      "instr_full_name": "Caul White",
+      "instr_last_name": "White",
+      "instr_first_name": "Caul",
+      "class_subj": "KXND",
+      "class_cat_nbr": "250",
+      "class_section": "09",
+      "class_number": "51737",
+      "q1_average": "2.95",
+      "q2_average": "4.56",
+      "q3_average": "4.67",
+      "q4_average" : "4.75",
+      "q5_average" : "2.45",
+      "q6_average" : "3.45",
+      "q7_average" : "2.23",
+      "q8_average" : "3.35",
+      "q9_average" : "3.89",
+      "q10_average" : "1.23",
+      "campus" : "RIT Main"
+    }
+  }, {
+    "model": "main.EvalResults",
+    "pk": 6,
+    "fields": {
+      "term_code": "2161",
+      "class_code": "250",
+      "class_desc": "Concepts of Computer Systems",
+      "instr_full_name": "Paul White",
+      "instr_last_name": "White",
+      "instr_first_name": "Paul",
+      "class_subj": "ABCD",
+      "class_cat_nbr": "250",
+      "class_section": "10",
+      "class_number": "54297",
+      "q1_average": "3.95",
+      "q2_average": "4.56",
+      "q3_average": "1.67",
+      "q4_average" : "1.75",
+      "q5_average" : "3.45",
+      "q6_average" : "3.45",
+      "q7_average" : "2.23",
+      "q8_average" : "1.35",
+      "q9_average" : "1.89",
+      "q10_average" : "2.23",
+      "campus" : "RIT Main"
+    }
+  }, {
+    "model": "main.EvalResults",
+    "pk": 7,
+    "fields": {
+      "term_code": "2161",
+      "class_code": "250",
+      "class_desc": "Concepts of Computer Systems",
+      "instr_full_name": "Potato White",
+      "instr_last_name": "White",
+      "instr_first_name": "Potato",
+      "class_subj": "AKDX",
+      "class_cat_nbr": "250",
+      "class_section": "04",
+      "class_number": "52997",
+      "q1_average": "2.95",
+      "q2_average": "4.56",
+      "q3_average": "2.67",
+      "q4_average" : "3.75",
+      "q5_average" : "3.45",
+      "q6_average" : "3.45",
+      "q7_average" : "4.23",
+      "q8_average" : "1.35",
+      "q9_average" : "3.89",
+      "q10_average" : "2.23",
       "campus" : "RIT Main"
     }
   }
