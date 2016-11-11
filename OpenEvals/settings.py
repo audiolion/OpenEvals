@@ -25,9 +25,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = secrets.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['openevals.rit.edu','evals.rit.edu']
 
 
 # Application definition
@@ -58,11 +59,7 @@ STATICFILES_FINDERS = (
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = '/static/'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
-]
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 STATIC_PRECOMPILER_COMPILERS = (
     ('static_precompiler.compilers.LESS', {
@@ -112,13 +109,12 @@ DATABASE_ROUTERS = ['main.models.CustomRouter']
 DATABASES = {
     'default': {
         #'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': secrets.NAME,
+        'NAME': '/var/www/evals/user',
         'USER': secrets.USER,
         'PASSWORD': secrets.PASSWORD,
         #'HOST': secrets.HOST,
         #'PORT': secrets.PORT,
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'user'
     },
     'oracle': {
         'ENGINE': 'django.db.backends.oracle',
@@ -172,4 +168,3 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_URL = '/static/'
