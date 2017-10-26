@@ -35,7 +35,6 @@
 {% endblock %}
 
 {% block content %}
-<<<<<<< HEAD
 <h2 class="text-center">Summary Results</h2>
 <div class="container">
   <div class="panel panel-default">
@@ -62,41 +61,6 @@
         </td>
         <td>{{ratings.1}}</td>
       </tr>
-=======
-
-<a name="results"></a>
-    <h1 class="text-center" style="margin-top: 50px;>{{firstname}} {{lastname}}</h1>
-
-<h3 class="text-center">Professor Results</h3>
-<div class="container">
-  <div class="panel panel-default" style="padding: 50px 0 50px;">
-
-      <div class="col-xs-12 col-sm-6 text-center">
-          <div class="c100 bigger p{{ ratings.0|convert_100 }} {{ ratings.0|color_rate }}" style="clear: both; margin-bottom: 20px;">
-                <span>{{ ratings.0|convert_10 }}</span>
-                <div class="slice">
-                    <div class="bar"></div>
-                    <div class="fill"></div>
-                </div>
-            </div>
-          <div class="text-center" style="clear: both; margin-top: 30px; width: 350px; margin: auto;">
-              {{questions.0.text}}
-          </div>
-      </div>
-      <div class="col-xs-12 col-sm-6 text-center">
-          <div class="c100 bigger p{{ ratings.1|convert_100 }} {{ ratings.1|color_rate }}" style="clear: both; margin-bottom: 20px;">
-                <span>{{ ratings.1|convert_10 }}</span>
-                <div class="slice">
-                    <div class="bar"></div>
-                    <div class="fill"></div>
-                </div>
-            </div>
-          <div class="text-center" style="clear: both; margin-top: 30px; width: 350px; margin: auto;">
-              {{questions.1.text}}
-          </div>
-      </div>
-      <table class="table">
->>>>>>> master
     </table>
 
   </div>
@@ -105,7 +69,6 @@
 <div class="container">
   <div class="row">
     {% for course in courses %}
-<<<<<<< HEAD
       <div class="col-md-4">
         <div class="panel panel-default">
           <div class="panel-heading"><a href= "{% url 'main:course_full' course.class_subj course.class_cat_nbr %}" ><h3>{{ course.class_subj}}-{{ course.class_cat_nbr }}-{{course.class_section}}</h3></a></div>
@@ -134,99 +97,6 @@
               <td>{{ course.q2_average }} / 5</td>
             </tr>
           </table>
-=======
-      <div class="col-sm-6 col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-heading"><a href= "{% url 'main:course_full' course.class_subj course.class_cat_nbr %}#results" ><h3>{{ course.class_subj}}-{{ course.class_cat_nbr }}-{{course.class_section}}</h3></a></div>
-          <table class="table table-striped">
-            <tr>
-                <td style="vertical-align: middle;">
-                    Helpful Instructor?
-                </td>
-                <td>
-                    <div class="c100 p{{ course.q1_average|convert_100 }} small {{ course.q1_average|color_rate }}">
-                        <span>{{ course.q1_average|convert_10 }}</span>
-                        <div class="slice">
-                            <div class="bar"></div>
-                            <div class="fill"></div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td style="vertical-align: middle;">
-                    Responsive Instructor?
-                </td>
-                <td>
-                    <div class="c100 p{{ course.q2_average|convert_100 }} small {{ course.q2_average|color_rate }}">
-                        <span>{{ course.q2_average|convert_10 }}</span>
-                        <div class="slice">
-                            <div class="bar"></div>
-                            <div class="fill"></div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td style="vertical-align: middle;">
-                    Organized Course?
-                </td>
-                <td>
-                    <div class="c100 p{{ course.q3_average|convert_100 }} small {{ course.q3_average|color_rate }}">
-                        <span>{{ course.q3_average|convert_10 }}</span>
-                        <div class="slice">
-                            <div class="bar"></div>
-                            <div class="fill"></div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td style="vertical-align: middle;">
-                    Advanced My Understanding?
-                </td>
-                <td>
-                    <div class="c100 p{{ course.q4_average|convert_100 }} small {{ course.q4_average|color_rate }}">
-                        <span>{{ course.q4_average|convert_10 }}</span>
-                        <div class="slice">
-                            <div class="bar"></div>
-                            <div class="fill"></div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td style="vertical-align: middle;">
-                    Workload?
-                </td>
-                <td>
-                    <div class="c100 p{{ course.q5_average|convert_100 }} small {{ course.q5_average|color_rate }}">
-                        <span>{{ course.q5_average|convert_10 }}</span>
-                        <div class="slice">
-                            <div class="bar"></div>
-                            <div class="fill"></div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td style="vertical-align: middle;">
-                    Would Recommend?
-                </td>
-                <td>
-                    <div class="c100 p{{ course.q1_average|convert_100 }} small {{ course.q6_average|color_rate }}">
-                        <span>{{ course.q1_average|convert_10 }}</span>
-                        <div class="slice">
-                            <div class="bar"></div>
-                            <div class="fill"></div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-
-
-            </table>
->>>>>>> master
         </div>
       </div>
     {% endfor %}
