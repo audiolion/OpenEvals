@@ -5,14 +5,10 @@
 {% load staticfiles %}
 {% block carousel %}
 
-<<<<<<< HEAD
   <div class="container-fluid campus-carousel" style="background-image:url({% static "carousel.jpg" %})">
     <div class="col-xs-12 col-sm-6 col-sm-offset-3">
       <div class="text-center carousel-description"><h3>Search</h3></div>
         <form class="main" action="{% url 'main:search' "" %}" method="get">
-=======
-        <form class="main search-margin" action="{% url 'main:search' "" %}" method="get">
->>>>>>> master
             {{ search_form }}
         </form>
 
@@ -33,16 +29,9 @@
       <h1 class="text-center">Courses</h1>
       <div class="row">
         {% for course in courses  %}
-<<<<<<< HEAD
         <a href= "{% url 'main:course_full' course.subj course.classcatnbr %}" >
           <div class="square col-xs-12">
             <div class="square-content" style="height:auto;">
-=======
-        <a href= "{% url 'main:course_full' course.subj course.classcatnbr %}#results" >
-          <div class="square col-xs-12">
-            <div class="square-content" style="height:auto;">
-            <h4>{{ course.title }}</h4>
->>>>>>> master
               <h3 style="color:black;">{{course.subj}} - {{course.classcatnbr}}</h3>
               <h4 class="primary_link">
                 {% for prof in course.professors %}
@@ -85,11 +74,7 @@
               </div>
               <h4>
                 {% for course in prof.tileCourses %}
-<<<<<<< HEAD
                 <a href="{% url 'main:course_full' course.subj course.classcatnbr %}"  class="primary_link">
-=======
-                <a href="{% url 'main:course_full' course.subj course.classcatnbr %}#results"  class="primary_link">
->>>>>>> master
                   {{ course.subj }}-{{ course.classcatnbr }}&nbsp;
                 </a>
                 {% endfor %}

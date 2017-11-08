@@ -1,0 +1,19 @@
+Junit Testing
+Parse method, IO Exception
+Test data reception, sending to appropriate classes (Collect data, and filters data)
+We will need to create TestEdgeFile with method that will check if style is “Entity” or     “Attribute” and it will check the table name aswell.
+
+EdgeField.java
+In this file data is collected and stored the into the database.
+We are going to test the variables in EdgeField.java to ensure that the table name is valid. For testing purpose we used dummy variable with correct value just so we can test.
+
+
+CreateDLLMySQL.java
+We are going to test database name input, test input collection from edgefield and edgetest
+We are also going to make a databaseName test, which will ensure that it is a valid and proper database, using string input test with Junit. 
+
+We made a test  called DDL.java that sends a string containing an entire create database string to the CreateDDLMySql.java , it is then ran through the java program. The method called is getSQLString(). So we compared the getSQLString() that was returned (the output), to the input string. If the string is the same (meaning that it can create an entire database), than the TestRunnerSql.java would return as true, if the input string and output string are different than the program would return false. The program returned false because the program could not create a proper create database string.
+
+
+Mysql tests:
+For the sql test we took the output from the CreatDDLMySQl.java method getSQLString and pasted it in a mysql command prompt, the mysql had an error explaining that the output string from getSQLString(), is incorrect. Therefore the sql created needs to be fixed.
